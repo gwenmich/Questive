@@ -8,6 +8,10 @@ from src.screens.game_play import GamePlay
 from src.screens.main_menu import MainMenu
 from src.screens.rules import Rules
 
+from src.screens.questions import Question
+from src.screens.categories import Category
+from src.screens.clues import Clue
+
 
 class Game:
     def __init__(self):
@@ -21,11 +25,19 @@ class Game:
         self.game_play = GamePlay(self.screen, self.game_state_manager)
         self.game_over = GameOver(self.screen, self.game_state_manager)
 
+        self.question = Question(self.screen, self.game_state_manager)
+        self.category = Category(self.screen, self.game_state_manager)
+        self.clue = Clue(self.screen, self.game_state_manager)
+
         self.states = {
             "main_menu": self.main_menu,
             "rules": self.rules,
             "game_play": self.game_play,
-            "game_over": self.game_over
+            "game_over": self.game_over,
+            "category" : self.category,
+            "question" : self.question,
+            "clue" : self.clue,
+            "suspects" : self.suspects # get these from db_utils
         }
 
         self.event_handler = EventHandler(self.game_state_manager)

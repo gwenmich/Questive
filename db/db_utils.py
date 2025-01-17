@@ -1,3 +1,5 @@
+# for getting information from the database
+
 import mysql.connector
 from db_config import HOST, USER, PASSWORD, DATABASE
 

@@ -1,6 +1,7 @@
-class Suspects:
-    def __init__(self, display, game_state_manager):
-        super().__init__(display, game_state_manager)
+from src.screens.base_screen import BaseScreen
+
+
+class Suspects(BaseScreen):
 
     def run(self):
         pass

@@ -3,8 +3,8 @@ from src.game_config.global_config import *
 
 class Button:
 
-    def __init__(self, x, y, width, height, colour, bg_colour, text):
-        self.font = SMALL_FONT
+    def __init__(self, x, y, width, height, colour, bg_colour, text, font_size):
+        self.font = pygame.font.Font(FONT, font_size)
         self.text = text
 
         self.x = x

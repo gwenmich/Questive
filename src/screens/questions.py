@@ -8,20 +8,33 @@ class Question:
     def __init__(self, display, game_state_manager):
         self.display = display
         self.game_state_manager = game_state_manager
+        self.buttons = []
+        self.get_choices()
 
     def display_question(self):
-        self.display.fill("black")
+        self.display.fill(BLACK)
         render_text(questions[0]["question"], SMALL_FONT, (SCREEN_WIDTH//2, 180), self.display)
+        for button in self.buttons:
+            self.display.blit(button.image, button.rect)
 
-    def display_choices(self):
+    def get_choices(self):
         choices = []
-        questions[0]["correct_answer"].append(choices)
+        choices.append(questions[0]["correct_answer"])
         for ans in questions[0]["incorrect_answers"]:
-            ans.append(choices)
+            choices.append(ans)
 
-        first_choice = Button(SCREEN_WIDTH//2, 220,800, 40, WHITE)
+        random.shuffle(choices)
+
+        for i, choice in enumerate(choices):
+            x = SCREEN_WIDTH//2
+            y = 220 + i * 50
+            width, height = 800, 40
+            button = Button(x, y, width, height, WHITE, DARK_GREY, choice, SMALL_FONT)
+            self.buttons.append(button)
+
 
 
 
     def run(self):
         self.display_question()
+        # self.display_choices()

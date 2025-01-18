@@ -2,7 +2,7 @@ import pygame
 
 from src.event_handler.event_handler import EventHandler
 from src.game_state.game_state_manager import GameStateManager
-from src.game_config.global_config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
+from src.game_config.global_config import *
 from src.screens.game_over import GameOver
 from src.screens.game_play import GamePlay
 from src.screens.main_menu import MainMenu
@@ -37,7 +37,7 @@ class Game:
             # "category" : self.category, not using for now
             "question" : self.question,
             "clue" : self.clue,
-            "suspects" : self.suspects # get these from db_utils
+            # "suspects" : self.suspects # get these from db_utils
         }
 
         self.event_handler = EventHandler(self.game_state_manager)
@@ -48,8 +48,8 @@ class Game:
             self.event_handler.handle_events()
 
             # returns current state and runs that state
-            self.states[self.game_state_manager.get_state()].run()
-
+            # self.states[self.game_state_manager.get_state()].run()
+            self.question.run()
             pygame.display.update()
             self.clock.tick(FPS)
 

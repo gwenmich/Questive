@@ -7,9 +7,10 @@ class Question:
         self.display = display
         self.game_state_manager = game_state_manager
 
-    def run(self):
-        pass
-
     def display_question(self):
         self.display.fill("black")
         render_text(questions[0]["question"], SMALL_FONT, (1280//2, 180), self.display)
+
+
+    def run(self):
+        self.display_question()

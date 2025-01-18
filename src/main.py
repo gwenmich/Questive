@@ -26,7 +26,7 @@ class Game:
         self.game_over = GameOver(self.screen, self.game_state_manager)
 
         self.question = Question(self.screen, self.game_state_manager)
-        self.category = Category(self.screen, self.game_state_manager)
+        # self.category = Category(self.screen, self.game_state_manager) not using for now
         self.clue = Clue(self.screen, self.game_state_manager)
 
         self.states = {
@@ -34,7 +34,7 @@ class Game:
             "rules": self.rules,
             "game_play": self.game_play,
             "game_over": self.game_over,
-            "category" : self.category,
+            # "category" : self.category, not using for now
             "question" : self.question,
             "clue" : self.clue,
             "suspects" : self.suspects # get these from db_utils

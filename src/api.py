@@ -29,7 +29,7 @@ data = {
 def decode_strings():
 
     for question in data["results"]:
-        question["category"] = html.unescape(question["category"])
+        # question["category"] = html.unescape(question["category"])
         question["question"] = html.unescape(question["question"])
         question["correct_answer"] = html.unescape(question["correct_answer"])
         question["incorrect_answers"] = [html.unescape(ans) for ans in question["incorrect_answers"]]

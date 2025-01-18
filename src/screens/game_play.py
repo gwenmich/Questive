@@ -10,7 +10,6 @@ class GamePlay:
 
 # Initial game logic (subject to change)
 
-# display question's category
 # show question & buttons with answers
 # if wrong lose 1 life and try again?
 # if correct show page with clue and button click next

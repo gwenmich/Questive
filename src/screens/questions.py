@@ -13,7 +13,7 @@ class Question:
 
     def display_question(self):
         self.display.fill(BLACK)
-        render_text(questions[0]["question"], SMALL_FONT, (SCREEN_WIDTH//2, 180), self.display)
+        render_text(questions[0]["question"], LARGE_FONT, (SCREEN_WIDTH//2, 180), self.display)
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
 
@@ -27,8 +27,8 @@ class Question:
 
         for i, choice in enumerate(choices):
             x = SCREEN_WIDTH//2 - 400
-            y = 240 + i * 50
-            width, height = 800, 40
+            y = 250 + i * 80
+            width, height = 800, 50
             button = Button(x, y, width, height, WHITE, DARK_GREY, choice, SMALL_FONT)
             self.buttons.append(button)
 

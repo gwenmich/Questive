@@ -6,7 +6,7 @@ FPS = 60
 
 FONT = "assets/font/PressStart2P-Regular.ttf"
 SMALL_FONT = 20
-LARGE_FONT = 30
+LARGE_FONT = 25
 
 WHITE = "#FFFFFF"
 BLACK = "#000000"

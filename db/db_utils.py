@@ -10,6 +10,7 @@ class DbConnectionError(Exception):
 
 
 class DbConnection:
+
     # Database connection
     @staticmethod
     def _connect_to_db():
@@ -28,17 +29,15 @@ class DbConnection:
         suspect_details = []
         for suspect_info in suspect:
             suspect_details.append({
-                "id": int(suspect_info[0]),
+                "suspect_id": int(suspect_info[0]),
                 "name": suspect_info[1],
-                "age": int(suspect_info[2]),
-                "hair_colour": suspect_info[3],
-                "eye_colour": suspect_info[4],
-                "wears_glasses": bool(suspect_info[5]),
-                "shirt_colour": suspect_info[6],
-                "trouser_colour": suspect_info[7],
-                "shoe_colour": suspect_info[8],
-                "earring": bool(suspect_info[9]),
-                "wears_a_hat": bool(suspect_info[10])
+                "hair_colour": suspect_info[2],
+                "eye_colour": suspect_info[3],
+                "wears_glasses": bool(suspect_info[4]),
+                "shirt_colour": suspect_info[5],
+                "trouser_colour": suspect_info[6],
+                "shoe_colour": suspect_info[7],
+                "wears_a_hat": bool(suspect_info[8])
             })
         return suspect_details
 
@@ -48,7 +47,7 @@ class DbConnection:
         top_ten_scores = []
         for score in high_scores:
             top_ten_scores.append({
-                "id": int(score[0]),
+                "player_id": int(score[0]),
                 "score": int(score[1])
             })
         return top_ten_scores
@@ -72,8 +71,8 @@ class DbConnection:
             return results_dict
 
         except Exception:
-            raise DbConnectionError("Failed to read data from DB: %s" % DATABASE)
-
+            raise DbConnectionError("Failed to read data from DB: %s" % DATABASE,
+                                    " Check you've entered username and password in db/db_config.")
         finally:
             if database_connection:
                 database_connection.close()
@@ -97,20 +96,50 @@ class DbConnection:
         high_scores_dict = self.check_database_connection(high_scores, self._high_score_dictionary)
         return high_scores_dict
 
+    # Replaces lowest score with new high score in db
+    def update_high_scores(self, new_high_score):
+        database_connection = None
+        try:
+            database_connection = self._connect_to_db()
+            cur = database_connection.cursor()
+            print("Connected to DB: %s" % DATABASE)
 
-# IN DEVELOPMENT
-# # Adds a new high score to the database
-# def add_new_high_score(self, new_score):
-#     new_high_score = """INSERT INTO high scores (score) VALUES (new_score);"""
-#     print(f"NEW High Score added to db: {new_score}")
-#     return self.get_high_scores()
+            # The middle SELECT/FROM is required due to an mySQL limitation, which won't allow direct access to the
+            # end subquery due to a modifying/reading table conflict in immediate queries
+            query = """
+            UPDATE high_scores 
+            SET score = %s 
+            WHERE player_id = (
+                SELECT player_id 
+                FROM (
+                    SELECT player_id 
+                    FROM high_scores 
+                    ORDER BY score ASC 
+                    LIMIT 1
+                    ) AS SUBQUERY
+            );"""
+            # The above subquery selects the player with the lowest score
+
+            cur.execute(query, [new_high_score])
+            database_connection.commit()  # Commits permanent save to db required for INSERTS/UPDATES
+
+            cur.close()
+
+            return self.get_high_scores()
+
+        except Exception:
+            raise DbConnectionError("Failed to read data from DB: %s" % DATABASE)
+        finally:
+            if database_connection:
+                database_connection.close()
+                print("%s connection is closed" % DATABASE)
 
 
 # sample calls to test db_utils
 if __name__ == "__main__":
     pass
-# db_connection = DbConnection()
-# db_connection.get_suspects()
-# db_connection.get_random_suspect()
-# db_connection.get_high_scores()
-# db_connection.add_new_high_score(9)
+    # db_connection = DbConnection()
+    # db_connection.get_suspects()
+    # db_connection.get_random_suspect()
+    # db_connection.get_high_scores()
+    # db_connection.update_high_scores(12)

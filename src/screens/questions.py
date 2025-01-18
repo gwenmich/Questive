@@ -26,8 +26,8 @@ class Question:
         random.shuffle(choices)
 
         for i, choice in enumerate(choices):
-            x = SCREEN_WIDTH//2
-            y = 220 + i * 50
+            x = SCREEN_WIDTH//2 - 400
+            y = 240 + i * 50
             width, height = 800, 40
             button = Button(x, y, width, height, WHITE, DARK_GREY, choice, SMALL_FONT)
             self.buttons.append(button)

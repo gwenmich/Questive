@@ -1,7 +1,4 @@
-from src.screens.base_screen import BaseScreen
-
-
-class GameOver(BaseScreen):
+class Suspects:
     def __init__(self, display, game_state_manager):
         super().__init__(display, game_state_manager)
 

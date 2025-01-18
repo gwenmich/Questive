@@ -3,11 +3,12 @@ from src.game_config.global_config import *
 from src.api import questions
 import random
 from src.game_config.button import Button
+from src.screens.base_screen import BaseScreen
 
-class Question:
+
+class Question(BaseScreen):
     def __init__(self, display, game_state_manager):
-        self.display = display
-        self.game_state_manager = game_state_manager
+        super().__init__(display, game_state_manager)
         self.buttons = []
         self.get_choices()
 

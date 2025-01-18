@@ -9,12 +9,12 @@ CREATE TABLE suspects (
     age INT NOT NULL,
     hair_colour VARCHAR(20) NOT NULL,
     eye_colour VARCHAR(10) NOT NULL,
-    height INT NOT NULL,
-    piercing BOOL NOT NULL,
-    tattoo BOOL NOT NULL,
-    wears_a_hat BOOL NOT NULL,
-    occupation VARCHAR(30) NOT NULL,
-    country VARCHAR(30) NOT NULL
+    wears_glasses BOOL NOT NULL,
+    shirt_colour VARCHAR(20) NOT NULL,
+    trouser_colour VARCHAR(20) NOT NULL,
+    shoe_colour VARCHAR(20) NOT NULL,
+    earring BOOL NOT NULL,
+    wears_a_hat BOOL NOT NULL
 );
 
 
@@ -25,22 +25,18 @@ CREATE TABLE high_scores (
 
 
 -- list of suspect details
-INSERT INTO suspects (name, age, hair_colour, eye_colour, height, piercing, tattoo, wears_a_hat, occupation, country)
+INSERT INTO suspects (name, age, hair_colour, eye_colour, wears_glasses, shirt_colour, trouser_colour, shoe_colour, earring, wears_a_hat)
 VALUES
-('Aisha', 19, 'Brown', 'Brown', 160, TRUE, TRUE, TRUE, 'Student', 'England'),
-('Arianne', 38, 'Blonde', 'Brown', 164, TRUE, TRUE, FALSE, 'Teacher', 'England'),
-('Bob', 24, 'Brown', 'Brown', 190, TRUE, FALSE, TRUE, 'Software developer', 'Wales'),
-('Carlos', 29, 'Blonde', 'Blue', 165, FALSE, FALSE, FALSE, 'Life Guard', 'Greece'),
-('Dave', 31, 'Brown', 'Blue', 178, FALSE, TRUE, TRUE, 'Cyber security', 'Scotland'),
-('Emily', 37, 'Black', 'Blue', 166, FALSE, TRUE, FALSE, 'Cyber security', 'France'),
-('Fathiah', 42, 'Black', 'Hazel', 183, TRUE, FALSE, TRUE, 'Teacher', 'Scotland'),
-('Giovanni', 51, 'Grey', 'Blue', 172, TRUE, FALSE, FALSE, 'Actor', 'Greece'),
-('Gwen', 51, 'Black', 'Blue', 172, TRUE, TRUE, TRUE, 'Software developer', 'Greece'),
-('Hamed', 59, 'Brown', 'Brown', 180, FALSE, TRUE, FALSE, 'Teacher', 'Wales'),
-('Helen', 60, 'Blonde', 'Blue', 175, FALSE, FALSE, TRUE, 'Teacher', 'Greece'),
-('Luke', 64, 'Bald', 'Brown', 171, FALSE, FALSE, FALSE, 'Teacher', 'England'),
-('Mel', 75, 'Blonde', 'Brown', 182, TRUE, TRUE, TRUE, 'Actor', 'England'),
-('Miguel', 80, 'Grey', 'Hazel', 170, TRUE, TRUE, FALSE, 'Student', 'Wales')
+('Al Ibi', 42, 'Red', 'Brown', FALSE, 'Blue', 'White', 'Red', TRUE, TRUE),
+('Tom Foolery', 19, 'Brown', 'Brown', TRUE, 'Red', 'White', 'Blue', TRUE, TRUE),
+('Mo Tives', 38, 'Blonde', 'Brown', FALSE, 'Blue', 'Black', 'Blue', FALSE, FALSE),
+('Bend Da-Rules', 24, 'Brown', 'Brown', TRUE, 'Yellow', 'Brown', 'Red', FALSE, TRUE),
+('De Cissed', 29, 'Blonde', 'Blue', TRUE, 'Red', 'Black', 'Blue', FALSE, FALSE),
+('Cole Blooded', 31, 'Brown', 'Blue', FALSE, 'Red', 'Black', 'Orange', TRUE, TRUE),
+('Ima Goner', 37, 'Red', 'Blue', FALSE, 'Yellow', 'Brown', 'Orange', FALSE, FALSE),
+('Barry De-Hatchett', 51, 'Blonde', 'Blue', TRUE, 'Yellow', 'Brown', 'Orange', FALSE, FALSE),
+('Faye Tality', 51, 'Red', 'Blue', TRUE, 'Blue', 'White', 'White', FALSE, TRUE),
+('Hugh Dunnit', 59, 'Brown', 'Brown', FALSE, 'Yellow', 'Black', 'Red', TRUE, TRUE)
 ;
 
 

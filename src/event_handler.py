@@ -1,5 +1,4 @@
 import sys
-
 import pygame
 
 
@@ -16,10 +15,10 @@ class EventHandler:
 
             if event.type == pygame.KEYDOWN:
                 if self.game_state_manager.get_state() == "main_menu":
-                    if event.key == pygame.K_r:
-                        self.game_state_manager.set_state("rules")
+                    if event.key == pygame.K_RETURN:
+                        self.game_state_manager.set_state("question")
 
-                elif self.game_state_manager.get_state() == "rules":
+                elif self.game_state_manager.get_state() == "question":
                     if event.key == pygame.K_BACKSPACE:
                         self.game_state_manager.set_state("main_menu")
 

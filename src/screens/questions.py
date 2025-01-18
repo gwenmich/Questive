@@ -1,4 +1,5 @@
-from game_config.global_config import *
+from src.game_config.utils import render_text
+from src.game_config.global_config import *
 from src.api import questions
 
 class Question:
@@ -11,4 +12,4 @@ class Question:
 
     def display_question(self):
         self.display.fill("black")
-        render_text(questions[0]["question"], small_font, (1280//2, 180))
+        render_text(questions[0]["question"], SMALL_FONT, (1280//2, 180), self.display)

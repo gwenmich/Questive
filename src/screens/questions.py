@@ -37,4 +37,7 @@ class Question:
 
     def run(self):
         self.display_question()
-        # self.display_choices()
+
+
+if __name__ == "main__":
+    pass

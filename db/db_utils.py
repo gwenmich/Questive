@@ -1,7 +1,7 @@
 # for getting information from the database
 
 import mysql.connector
-from db_config import HOST, USER, PASSWORD, DATABASE
+from db.db_config import HOST, USER, PASSWORD, DATABASE
 
 
 # Raised if a connection exception occurs in the script below

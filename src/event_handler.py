@@ -13,6 +13,7 @@ class EventHandler:
                 pygame.quit()
                 sys.exit()
 
+            # ----- CHANGE TO MOUSE/BUTTON PRESSES-------
             if event.type == pygame.KEYDOWN:
                 if self.game_state_manager.get_state() == "main_menu":
                     if event.key == pygame.K_RETURN:
@@ -21,6 +22,12 @@ class EventHandler:
                 elif self.game_state_manager.get_state() == "question":
                     if event.key == pygame.K_BACKSPACE:
                         self.game_state_manager.set_state("main_menu")
+                    if event.key == pygame.K_RETURN:
+                        self.game_state_manager.set_state("suspects")
+
+                elif self.game_state_manager.get_state() == "suspects":
+                    if event.key == pygame.K_RETURN:
+                        self.game_state_manager.set_state("question")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 from src.event_handler import EventHandler
+from src.game_config.utils import Draw
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
 from src.screens.game_over import GameOver
@@ -14,13 +15,15 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
 
+        self.draw = Draw(self.screen)
+
         self.game_state_manager = GameStateManager("question")
 
         self.main_menu = MainMenu(self.screen, self.game_state_manager)
         self.rules = Rules(self.screen, self.game_state_manager)
         self.game_over = GameOver(self.screen, self.game_state_manager)
-        self.question = Question(self.screen, self.game_state_manager)
-        self.suspects = Suspects(self.screen, self.game_state_manager)
+        self.question = Question(self.screen, self.game_state_manager, self.draw)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw)
 
         self.states = {
             "main_menu": self.main_menu,
@@ -29,6 +32,7 @@ class Game:
             "question": self.question,
             "suspects": self.suspects,
         }
+
 
         self.event_handler = EventHandler(self.game_state_manager)
 

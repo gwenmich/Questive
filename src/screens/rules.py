@@ -1,11 +1,16 @@
+from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
 from src.screens.base_screen import BaseScreen
 
 
 class Rules(BaseScreen):
 
+    def draw_screen(self):
+        # ------ Temporary placeholder----- ----------
+        self.draw.render_text("Rules - Press ENTER to move to next screen", MEDIUM_FONT,
+                              (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
     def run(self):
-        # ------ blue added for initial demo. To be replaced with rules background etc ----------
-        self.display.fill("blue")
+        self.draw_screen()
 
 
 if __name__ == "__main__":

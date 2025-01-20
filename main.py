@@ -1,3 +1,4 @@
+from src.clues import Clues
 from src.event_handler import EventHandler
 from src.game_config.utils import Draw
 from src.game_state_manager import GameStateManager
@@ -16,14 +17,15 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.draw = Draw(self.screen)
+        self.clues = Clues()
 
-        self.game_state_manager = GameStateManager("question")
+        self.game_state_manager = GameStateManager("main_menu")
 
-        self.main_menu = MainMenu(self.screen, self.game_state_manager)
-        self.rules = Rules(self.screen, self.game_state_manager)
-        self.game_over = GameOver(self.screen, self.game_state_manager)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues)
+        self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw, self.suspects)
+        self.rules = Rules(self.screen, self.game_state_manager, self.draw)
+        self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
         self.question = Question(self.screen, self.game_state_manager, self.draw)
-        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw)
 
         self.states = {
             "main_menu": self.main_menu,
@@ -33,11 +35,12 @@ class Game:
             "suspects": self.suspects,
         }
 
-
-        self.event_handler = EventHandler(self.game_state_manager)
+        self.event_handler = EventHandler(self.game_state_manager, self.suspects)
 
     def run(self):
         while True:
+            self.screen.fill(BLACK)
+
             # calls the central event handler for any state
             self.event_handler.handle_events()
 

@@ -7,8 +7,7 @@ from src.screens.base_screen import BaseScreen
 
 class Question(BaseScreen):
     def __init__(self, display, game_state_manager, draw):
-        super().__init__(display, game_state_manager)
-        self.draw = draw
+        super().__init__(display, game_state_manager, draw)
         self.buttons = []
         self.get_choices()
 

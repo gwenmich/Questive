@@ -85,10 +85,11 @@ class DbConnection:
         return suspects_dict
 
     # Gets a random suspect and all their details from the database
-    def get_random_suspect(self):
-        random_suspect = """SELECT * FROM suspects ORDER BY RAND() LIMIT 1;"""
-        random_suspect_dict = self.check_database_connection(random_suspect, self._suspect_dictionary)
-        return random_suspect_dict
+    def get_murderer(self):
+        murderer = """SELECT * FROM suspects ORDER BY RAND() LIMIT 1;"""
+        murderer_dict = self.check_database_connection(murderer, self._suspect_dictionary)
+        print(f"The murderer is {murderer_dict[0]["name"]}") # keep in for testing, uncomment for actual game play
+        return murderer_dict
 
     # Gets high scores from the database
     def get_high_scores(self):

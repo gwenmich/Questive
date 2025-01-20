@@ -14,7 +14,6 @@ class MainMenu(BaseScreen):
 
     def run(self):
         self.draw_screen()
-        self.suspects.get_murderer()
 
 
 if __name__ == "__main__":

@@ -1,17 +1,10 @@
 import random
 
-from db.db_utils import DbConnection
-
 
 class Clues:
 
-    def __init__(self):
-        # self.murderer_id = murderer - this needs to be passed in from suspects and details accessed from db
-        self.murderer = DbConnection().get_random_suspect()  # this line needs to be removed, and somehow use self.murderer (suspect_id) instead--------
-
-        print(self.murderer[0]["name"])
-        print(self.murderer[0]["name"].split())
-        print(len(self.murderer[0]["name"].split()[0]))
+    def __init__(self, murderer):
+        self.murderer = murderer
 
         self.clues = {
             1: f"The murderers lucky number is {len(self.murderer[0]["name"].split()[0])} like their name length",

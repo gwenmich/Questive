@@ -1,3 +1,4 @@
+from db.db_utils import DbConnection
 from src.clues import Clues
 from src.event_handler import EventHandler
 from src.game_config.utils import Draw
@@ -17,11 +18,12 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.draw = Draw(self.screen)
-        self.clues = Clues()
+        self.murderer = DbConnection().get_murderer()
+        self.clues = Clues(self.murderer)
 
         self.game_state_manager = GameStateManager("main_menu")
 
-        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues, self.murderer)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw, self.suspects)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw)
         self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
@@ -30,9 +32,9 @@ class Game:
         self.states = {
             "main_menu": self.main_menu,
             "rules": self.rules,
-            "game_over": self.game_over,
             "question": self.question,
             "suspects": self.suspects,
+            "game_over": self.game_over
         }
 
         self.event_handler = EventHandler(self.game_state_manager, self.suspects)

@@ -12,7 +12,6 @@ class Question(BaseScreen):
         self.get_choices()
 
     def display_question(self):
-        self.display.fill(BLACK)
         self.draw.render_text(questions[0]["question"], LARGE_FONT, (SCREEN_WIDTH // 2, 180))
         for button in self.buttons:
             self.display.blit(button.image, button.rect)

@@ -1,3 +1,4 @@
+import pygame
 from db.db_utils import DbConnection
 from src.game_config.button import Button
 from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH, WHITE, DARK_GREY, \
@@ -47,8 +48,11 @@ class Suspects(BaseScreen):
                 x = 210
                 y = 550
             self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
+            suspect_img = pygame.image.load(f"assets/suspects/{0}.png").convert_alpha()
+            self.display.blit(suspect_img, (x - 30, y - 80))
             x += 200
             n += 1
+
 
     def draw_arrest_button(self):
         arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH, 50, WHITE,

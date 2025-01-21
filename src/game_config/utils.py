@@ -1,6 +1,6 @@
 from src.game_config.button import Button
 from src.game_config.global_config import *
-
+import pygame
 
 class Draw:
     def __init__(self, screen):

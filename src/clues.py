@@ -14,9 +14,9 @@ class Clues:
             5: f"The murderer has {self.murderer[0]["trouser_colour"]} trousers",
             6: f"The murderer has {self.murderer[0]["shoe_colour"]} shoes",
             7: f"The murderer {self.murderer[0]["wears_a_hat"]}",
-            8: "Unhelpful clue 1",
-            9: "Unhelpful clue 2",
-            10: "Unhelpful clue 3",
+            8: "The murderer likes to sing in the shower",
+            9: "The murderer has a rubber duck",
+            10: "The murderer is allergic to peanuts",
         }
 
         self.remaining_clues = self.clues

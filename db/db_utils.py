@@ -1,7 +1,7 @@
 # for getting information from the database
 
 import mysql.connector
-from db_config import HOST, USER, PASSWORD, DATABASE
+from db.db_config import HOST, USER, PASSWORD, DATABASE
 
 
 # Raised if a connection exception occurs in the script below
@@ -33,11 +33,11 @@ class DbConnection:
                 "name": suspect_info[1],
                 "hair_colour": suspect_info[2],
                 "eye_colour": suspect_info[3],
-                "wears_glasses": bool(suspect_info[4]),
+                "wears_glasses": "wears glasses" if bool(suspect_info[4]) == True else "doesn't wear glasses",
                 "shirt_colour": suspect_info[5],
                 "trouser_colour": suspect_info[6],
                 "shoe_colour": suspect_info[7],
-                "wears_a_hat": bool(suspect_info[8])
+                "wears_a_hat": "wears a hat" if bool(suspect_info[8]) == True else "doesn't wear a hat"
             })
         return suspect_details
 
@@ -58,14 +58,14 @@ class DbConnection:
         try:
             database_connection = self._connect_to_db()
             cur = database_connection.cursor()
-            print("Connected to DB: %s" % DATABASE)
+            # print("Connected to DB: %s" % DATABASE) helpful for debugging
 
             query = sql_query
             cur.execute(query)
 
             result = cur.fetchall()
             results_dict = dictionary(result)
-            print(results_dict)
+            # print(results_dict) helpful for testing/debugging
 
             cur.close()
             return results_dict
@@ -76,7 +76,7 @@ class DbConnection:
         finally:
             if database_connection:
                 database_connection.close()
-                print("%s connection is closed" % DATABASE)
+                # print("%s connection is closed" % DATABASE) helpful for debugging
 
     # Gets all suspects and their details from the database
     def get_suspects(self):
@@ -85,10 +85,11 @@ class DbConnection:
         return suspects_dict
 
     # Gets a random suspect and all their details from the database
-    def get_random_suspect(self):
-        random_suspect = """SELECT * FROM suspects ORDER BY RAND() LIMIT 1;"""
-        random_suspect_dict = self.check_database_connection(random_suspect, self._suspect_dictionary)
-        return random_suspect_dict
+    def get_murderer(self):
+        murderer = """SELECT * FROM suspects ORDER BY RAND() LIMIT 1;"""
+        murderer_dict = self.check_database_connection(murderer, self._suspect_dictionary)
+        print(f"The murderer is {murderer_dict[0]["name"]}") # keep in for testing, uncomment for actual game play
+        return murderer_dict
 
     # Gets high scores from the database
     def get_high_scores(self):
@@ -102,7 +103,7 @@ class DbConnection:
         try:
             database_connection = self._connect_to_db()
             cur = database_connection.cursor()
-            print("Connected to DB: %s" % DATABASE)
+            # print("Connected to DB: %s" % DATABASE) helpful for debugging
 
             # The middle SELECT/FROM is required due to an mySQL limitation, which won't allow direct access to the
             # end subquery due to a modifying/reading table conflict in immediate queries
@@ -132,7 +133,7 @@ class DbConnection:
         finally:
             if database_connection:
                 database_connection.close()
-                print("%s connection is closed" % DATABASE)
+                # print("%s connection is closed" % DATABASE) helpful for debugging
 
 
 # sample calls to test db_utils

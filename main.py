@@ -1,4 +1,7 @@
+from db.db_utils import DbConnection
+from src.clues import Clues
 from src.event_handler import EventHandler
+from src.game_config.utils import Draw
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
 from src.screens.game_over import GameOver
@@ -14,26 +17,32 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
 
-        self.game_state_manager = GameStateManager("question")
+        self.draw = Draw(self.screen)
+        self.murderer = DbConnection().get_murderer()
+        self.clues = Clues(self.murderer)
 
-        self.main_menu = MainMenu(self.screen, self.game_state_manager)
-        self.rules = Rules(self.screen, self.game_state_manager)
-        self.game_over = GameOver(self.screen, self.game_state_manager)
-        self.question = Question(self.screen, self.game_state_manager)
-        self.suspects = Suspects(self.screen, self.game_state_manager)
+        self.game_state_manager = GameStateManager("main_menu")
+
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues, self.murderer)
+        self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw, self.suspects)
+        self.rules = Rules(self.screen, self.game_state_manager, self.draw)
+        self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
+        self.question = Question(self.screen, self.game_state_manager, self.draw)
 
         self.states = {
             "main_menu": self.main_menu,
             "rules": self.rules,
-            "game_over": self.game_over,
             "question": self.question,
             "suspects": self.suspects,
+            "game_over": self.game_over
         }
 
-        self.event_handler = EventHandler(self.game_state_manager)
+        self.event_handler = EventHandler(self.game_state_manager, self.suspects)
 
     def run(self):
         while True:
+            self.screen.fill(BLACK)
+
             # calls the central event handler for any state
             self.event_handler.handle_events()
 

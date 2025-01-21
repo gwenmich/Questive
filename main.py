@@ -24,7 +24,7 @@ class Game:
         self.game_state_manager = GameStateManager("main_menu")
 
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues, self.murderer)
-        self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw, self.suspects)
+        self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw)
         self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
         self.question = Question(self.screen, self.game_state_manager, self.draw)

@@ -9,6 +9,7 @@ from src.screens.main_menu import MainMenu
 from src.screens.rules import Rules
 from src.screens.questions import Question
 from src.screens.suspects import Suspects
+from src.screens.timer import Timer
 
 
 class Game:
@@ -20,14 +21,15 @@ class Game:
         self.draw = Draw(self.screen)
         self.murderer = DbConnection().get_murderer()
         self.clues = Clues(self.murderer)
+        self.timer = Timer(self.draw)
 
         self.game_state_manager = GameStateManager("main_menu")
 
-        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.clues, self.murderer)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues, self.murderer)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw)
         self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
-        self.question = Question(self.screen, self.game_state_manager, self.draw)
+        self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
 
         self.states = {
             "main_menu": self.main_menu,
@@ -37,7 +39,7 @@ class Game:
             "game_over": self.game_over
         }
 
-        self.event_handler = EventHandler(self.game_state_manager, self.suspects)
+        self.event_handler = EventHandler(self.game_state_manager, self.timer, self.suspects)
 
     def run(self):
         while True:

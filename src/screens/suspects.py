@@ -6,8 +6,9 @@ from src.screens.base_screen import BaseScreen
 
 
 class Suspects(BaseScreen):
-    def __init__(self, display, game_state_manager, draw, clues, murderer):
+    def __init__(self, display, game_state_manager, draw, timer, clues, murderer):
         super().__init__(display, game_state_manager, draw)
+        self.timer = timer
         self.clues = clues
         self.murderer = murderer
         self.active_clue = ""
@@ -56,6 +57,7 @@ class Suspects(BaseScreen):
         self.display.blit(arrest_button.image, arrest_button.rect)
 
     def run(self):
+        self.timer.draw_timer()
         self.draw_correct_answer()
         self.draw_clue()
         self.draw_text_guidance()

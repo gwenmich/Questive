@@ -6,8 +6,9 @@ from src.screens.base_screen import BaseScreen
 
 
 class Question(BaseScreen):
-    def __init__(self, display, game_state_manager, draw):
+    def __init__(self, display, game_state_manager, draw, timer):
         super().__init__(display, game_state_manager, draw)
+        self.timer = timer
         self.buttons = []
         self.get_choices()
 
@@ -32,6 +33,7 @@ class Question(BaseScreen):
             self.buttons.append(button)
 
     def run(self):
+        self.timer.draw_timer()
         self.display_question()
 
 

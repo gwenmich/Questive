@@ -7,18 +7,16 @@ class Clues:
         self.murderer = murderer
 
         self.clues = {
-            1: f"The murderers lucky number is {len(self.murderer[0]["name"].split()[0])} like their name length",
-            2: f"The murderer has {self.murderer[0]["hair_colour"]} hair",
-            3: f"The murderer has {self.murderer[0]["eye_colour"]} eyes",
-            4: f"The murderer {self.murderer[0]["wears_glasses"]}",
-            5: f"The murderer wears a {self.murderer[0]["shirt_colour"]} shirt",
-            6: f"The murderer has {self.murderer[0]["trouser_colour"]} trousers",
-            7: f"The murderer has {self.murderer[0]["shoe_colour"]} shoes",
-            8: f"The murderer {self.murderer[0]["wears_a_hat"]}",
-            9: "Unhelpful clue 1",
-            10: "Unhelpful clue 2",
-            11: "Unhelpful clue 3",
-            12: "Unhelpful clue 4"
+            1: f"The murderer has {self.murderer[0]["hair_colour"]} hair",
+            2: f"The murderer has {self.murderer[0]["eye_colour"]} eyes",
+            3: f"The murderer {self.murderer[0]["wears_glasses"]}",
+            4: f"The murderer wears a {self.murderer[0]["shirt_colour"]} shirt",
+            5: f"The murderer has {self.murderer[0]["trouser_colour"]} trousers",
+            6: f"The murderer has {self.murderer[0]["shoe_colour"]} shoes",
+            7: f"The murderer {self.murderer[0]["wears_a_hat"]}",
+            8: "Unhelpful clue 1",
+            9: "Unhelpful clue 2",
+            10: "Unhelpful clue 3",
         }
 
         self.remaining_clues = self.clues

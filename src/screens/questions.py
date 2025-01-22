@@ -61,7 +61,7 @@ class Question(BaseScreen):
             self.display_question()
             self.display_buttons()
 
-        # mouse click to be added to control the index increment
+        # mouse logic to be added to control the index increment
         self.index += 1
 
 

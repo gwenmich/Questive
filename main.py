@@ -9,6 +9,7 @@ from src.screens.main_menu import MainMenu
 from src.screens.rules import Rules
 from src.screens.questions import Question
 from src.screens.suspects import Suspects
+
 import pygame
 
 

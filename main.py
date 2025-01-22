@@ -11,6 +11,8 @@ from src.screens.questions import Question
 from src.screens.suspects import Suspects
 from src.screens.timer import Timer
 
+import pygame
+
 
 class Game:
     def __init__(self):

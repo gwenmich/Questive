@@ -1,5 +1,3 @@
-# for getting information from the database
-
 import mysql.connector
 from db.db_config import HOST, USER, PASSWORD, DATABASE
 

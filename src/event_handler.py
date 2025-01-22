@@ -4,8 +4,9 @@ import pygame
 
 # central event handler that manages all state key and mouse options
 class EventHandler:
-    def __init__(self, game_state_manager, suspects):
+    def __init__(self, game_state_manager, timer, suspects):
         self.game_state_manager = game_state_manager
+        self.timer = timer
         self.suspects = suspects
 
     def handle_events(self):
@@ -23,6 +24,7 @@ class EventHandler:
                 elif self.game_state_manager.get_state() == "rules":
                     if event.key == pygame.K_RETURN:
                         self.game_state_manager.set_state("question")
+                        self.timer.start_timer()
 
                 elif self.game_state_manager.get_state() == "question":
                     if event.key == pygame.K_BACKSPACE:

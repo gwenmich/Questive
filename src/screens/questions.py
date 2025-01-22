@@ -1,5 +1,5 @@
 from src.game_config.global_config import *
-from src.api import questions
+from src.api import decode_strings
 import random
 from src.game_config.button import Button
 from src.screens.base_screen import BaseScreen
@@ -10,31 +10,59 @@ class Question(BaseScreen):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
         self.buttons = []
-        self.get_choices()
+
+        self.data = decode_strings()
+        self.question_data = self.data["results"]
+        self.questions = []
+        self.correct_answers = []
+        self.incorrect_answers = []
+        self.question_answers = []
+
+        self.index = 0
+
+        self.get_question_data()
+        self.create_buttons()
+
+
+    def get_question_data(self):
+        for question in self.question_data:
+            self.questions.append(question["question"])
+            self.correct_answers.append(question["correct_answer"])
+            self.incorrect_answers.append(question["incorrect_answers"])
+
+            all_answers = [question["correct_answer"]] + question["incorrect_answers"]
+            self.question_answers.append(all_answers)
+
 
     def display_question(self):
-        self.draw.render_text(questions[0]["question"], LARGE_FONT, (SCREEN_WIDTH // 2, 180))
+        self.draw.render_text(self.questions[self.index], LARGE_FONT, (SCREEN_WIDTH // 2, 180))
+
+    def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
 
-    def get_choices(self):
-        choices = []
-        choices.append(questions[0]["correct_answer"])
-        for ans in questions[0]["incorrect_answers"]:
-            choices.append(ans)
 
-        random.shuffle(choices)
+    def create_buttons(self):
+        self.buttons = []
+        random.shuffle(self.question_answers[self.index])
 
-        for i, choice in enumerate(choices):
+        for i, answer in enumerate(self.question_answers[self.index]):
             x = SCREEN_WIDTH//2 - 400
             y = 250 + i * 80
             width, height = 800, 50
-            button = Button(x, y, width, height, WHITE, DARK_GREY, choice, MEDIUM_FONT)
+            button = Button(x, y, width, height, WHITE, DARK_GREY, answer, MEDIUM_FONT)
             self.buttons.append(button)
+
 
     def run(self):
         self.timer.draw_timer()
-        self.display_question()
+
+        if self.index < len(self.questions):
+            self.display_question()
+            self.display_buttons()
+
+        # mouse click to be added to control the index increment
+        self.index += 1
 
 
 if __name__ == "main__":

@@ -3,7 +3,7 @@ from src.api import decode_strings
 import random
 from src.game_config.button import Button
 from src.screens.base_screen import BaseScreen
-
+import pygame
 
 class Question(BaseScreen):
     def __init__(self, display, game_state_manager, draw, timer):
@@ -35,7 +35,14 @@ class Question(BaseScreen):
 
 
     def display_question(self):
-        self.draw.render_text(self.questions[self.index], LARGE_FONT, (SCREEN_WIDTH // 2, 180))
+        if len(self.questions[self.index]) > 50:
+            split_question = self.questions[self.index].rfind(" ", 0, 50)
+            part_1 = self.questions[self.index][:split_question].strip()
+            part_2 = self.questions[self.index][split_question:].strip()
+            self.draw.render_text(part_1, MEDIUM_FONT, (SCREEN_WIDTH // 2, 150))
+            self.draw.render_text(part_2, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
+        else:
+            self.draw.render_text(self.questions[self.index], MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
     def display_buttons(self):
         for button in self.buttons:
@@ -62,7 +69,19 @@ class Question(BaseScreen):
             self.display_buttons()
 
         # mouse logic to be added to control the index increment
-        self.index += 1
+        mouse_position = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        for button in self.buttons:
+            if button.text == self.correct_answers[self.index]:
+                if button.is_pressed(mouse_position, mouse_pressed):
+                    self.game_state_manager.set_state("suspects")
+                    self.index += 1
+                    self.create_buttons()
+
+            elif button.text in self.incorrect_answers[self.index]:
+                if button.is_pressed(mouse_position, mouse_pressed):
+                    self.index += 1
 
 
 if __name__ == "main__":

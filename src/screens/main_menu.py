@@ -1,16 +1,34 @@
-from src.game_config.global_config import SCREEN_HEIGHT, SCREEN_WIDTH, MEDIUM_FONT
+from src.game_config.global_config import WHITE, DARK_GREY, LARGE_FONT
 from src.screens.base_screen import BaseScreen
-
+from src.game_config.button import Button
+import pygame
 
 class MainMenu(BaseScreen):
 
+    def __init__(self, display, game_state_manager, draw):
+        super().__init__(display, game_state_manager, draw)
+        self.play_button = Button(550, 360, 200, 80, WHITE, DARK_GREY, "Play", LARGE_FONT)
+        self.exit_button = Button(550, 490, 200, 80, WHITE, DARK_GREY, "Exit", LARGE_FONT)
+
+
     def draw_screen(self):
-        # ------ Temporary placeholder----- ----------
-        self.draw.render_text("Main Menu - Press ENTER to move to next screen", MEDIUM_FONT,
-                              (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        # to add logo of game above buttons
+        self.display.blit(self.play_button.image, self.play_button.rect)
+        self.display.blit(self.exit_button.image, self.exit_button.rect)
+
 
     def run(self):
         self.draw_screen()
+        mouse_position = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        # button logic
+        if self.play_button.is_pressed(mouse_position, mouse_pressed):
+            self.game_state_manager.set_state("rules")
+
+        if self.exit_button.is_pressed(mouse_position, mouse_pressed):
+            pygame.quit()
+
 
 
 if __name__ == "__main__":

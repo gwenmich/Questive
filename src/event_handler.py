@@ -9,11 +9,19 @@ class EventHandler:
         self.timer = timer
         self.suspects = suspects
 
+        # mouse position and pressed status
+        self.mouse_position = pygame.mouse.get_pos()
+        self.mouse_pressed = pygame.mouse.get_pressed()
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+
+    # probably don't need most of this code below - maybe put event handler logic
+    # in main.py run method? To discuss tomorrow
 
             # ----- CHANGE TO MOUSE/BUTTON PRESSES-------
             if event.type == pygame.KEYDOWN:

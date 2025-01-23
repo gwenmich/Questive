@@ -44,6 +44,7 @@ class Question(BaseScreen):
         else:
             self.draw.render_text(self.questions[self.index], MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
+
     def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
@@ -68,7 +69,6 @@ class Question(BaseScreen):
             self.display_question()
             self.display_buttons()
 
-        # mouse logic to be added to control the index increment
         mouse_position = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
 
@@ -81,7 +81,9 @@ class Question(BaseScreen):
 
             elif button.text in self.incorrect_answers[self.index]:
                 if button.is_pressed(mouse_position, mouse_pressed):
+                    self.game_state_manager.set_state("suspects")
                     self.index += 1
+                    self.create_buttons()
 
 
 if __name__ == "main__":

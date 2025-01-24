@@ -19,9 +19,8 @@ class EventHandler:
                 pygame.quit()
                 sys.exit()
 
-
-    # probably don't need most of this code below - maybe put event handler logic
-    # in main.py run method? To discuss tomorrow
+            # probably don't need most of this code below - maybe put event handler logic
+            # in main.py run method? To discuss tomorrow
 
             # ----- CHANGE TO MOUSE/BUTTON PRESSES-------
             if event.type == pygame.KEYDOWN:
@@ -41,6 +40,11 @@ class EventHandler:
                         self.game_state_manager.set_state("suspects")
 
                 elif self.game_state_manager.get_state() == "suspects":
+                    if event.key == pygame.K_RETURN:
+                        self.suspects.active_clue = ""
+                        self.game_state_manager.set_state("question")
+                # added temporarily until discussion
+                elif self.game_state_manager.get_state() == "wrong_answer":
                     if event.key == pygame.K_RETURN:
                         self.suspects.active_clue = ""
                         self.game_state_manager.set_state("question")

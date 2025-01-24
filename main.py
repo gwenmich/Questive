@@ -10,6 +10,7 @@ from src.screens.rules import Rules
 from src.screens.questions import Question
 from src.screens.suspects import Suspects
 from src.screens.timer import Timer
+from src.screens.wrong_answer import WrongAnswer
 
 import pygame
 
@@ -30,6 +31,7 @@ class Game:
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues, self.murderer)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw)
+        self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer)
         self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
         self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
 
@@ -37,6 +39,7 @@ class Game:
             "main_menu": self.main_menu,
             "rules": self.rules,
             "question": self.question,
+            "wrong_answer": self.wrong_answer,
             "suspects": self.suspects,
             "game_over": self.game_over
         }

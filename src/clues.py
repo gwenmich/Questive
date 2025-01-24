@@ -30,7 +30,7 @@ class Clues:
             del self.remaining_clues[random_clue_no]
 
             # used for testing/debugging
-            print("Clues remaining:", self.remaining_clues.keys())
+            # print("Clues remaining:", self.remaining_clues.keys()) uncomment for testing/debugging
             print(f"CLUE {random_clue_no}: {selected_clue}")
             return selected_clue
         else:

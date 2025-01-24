@@ -69,18 +69,17 @@ class Question(BaseScreen):
             self.display_question()
             self.display_buttons()
 
-        mouse_position = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
 
         for button in self.buttons:
             if button.text == self.correct_answers[self.index]:
-                if button.is_pressed(mouse_position, mouse_pressed):
+                if button.is_pressed(mouse_pressed):
                     self.game_state_manager.set_state("suspects")
                     self.index += 1
                     self.create_buttons()
 
             elif button.text in self.incorrect_answers[self.index]:
-                if button.is_pressed(mouse_position, mouse_pressed):
+                if button.is_pressed(mouse_pressed):
                     self.game_state_manager.set_state("suspects")
                     self.index += 1
                     self.create_buttons()

@@ -24,7 +24,8 @@ class Button:
         self.image.blit(self.content, self.content_rect)
 
 
-    def is_pressed(self, position, pressed):
+    def is_pressed(self, pressed):
+        position = pygame.mouse.get_pos()
         if self.rect.collidepoint(position):
             if pressed[0]:
                 return True

@@ -19,14 +19,13 @@ class MainMenu(BaseScreen):
 
     def run(self):
         self.draw_screen()
-        mouse_position = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
 
         # button logic
-        if self.play_button.is_pressed(mouse_position, mouse_pressed):
+        if self.play_button.is_pressed(mouse_pressed):
             self.game_state_manager.set_state("rules")
 
-        if self.exit_button.is_pressed(mouse_position, mouse_pressed):
+        if self.exit_button.is_pressed(mouse_pressed):
             pygame.quit()
 
 

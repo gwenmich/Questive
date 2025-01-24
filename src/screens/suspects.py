@@ -1,7 +1,7 @@
 import pygame
 from db.db_utils import DbConnection
 from src.game_config.button import Button
-from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH, SMALL_BUTTON_WIDTH
+from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH, SMALL_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT
 from src.screens.base_screen import BaseScreen
 
 
@@ -58,11 +58,12 @@ class Suspects(BaseScreen):
             n += 1
 
     def draw_arrest_button(self):
-        arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH, 50,
+        arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH,
+                               SMALL_BUTTON_HEIGHT,
                                "Arrest Suspect", SMALL_FONT)
         self.display.blit(arrest_button.image, arrest_button.rect)
 
-    def run(self):
+    def draw_screen(self):
         self.timer.draw_timer()
         self.draw_correct_answer()
         self.draw_clue()
@@ -70,6 +71,10 @@ class Suspects(BaseScreen):
         self.draw_suspects()
         self.draw_arrest_button()
         self.draw.draw_next_question_button()
+
+    def run(self):
+        self.draw_screen()
+        self.draw.check_button_press()
 
 
 if __name__ == "__main__":

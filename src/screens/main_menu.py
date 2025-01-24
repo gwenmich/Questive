@@ -1,15 +1,17 @@
-from src.game_config.global_config import LARGE_FONT
+from src.game_config.global_config import LARGE_FONT, MEDIUM_BUTTON_WIDTH, SCREEN_WIDTH, MEDIUM_BUTTON_HEIGHT
+from src.game_config.utils import Quit
 from src.screens.base_screen import BaseScreen
 from src.game_config.button import Button
-import pygame
 
 
 class MainMenu(BaseScreen):
 
     def __init__(self, display, game_state_manager, draw):
         super().__init__(display, game_state_manager, draw)
-        self.play_button = Button(550, 360, 200, 80, "Play", LARGE_FONT)
-        self.exit_button = Button(550, 490, 200, 80, "Exit", LARGE_FONT)
+        self.play_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 360, MEDIUM_BUTTON_WIDTH,
+                                  MEDIUM_BUTTON_HEIGHT, "Play", LARGE_FONT)
+        self.exit_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 490, MEDIUM_BUTTON_WIDTH,
+                                  MEDIUM_BUTTON_HEIGHT, "Exit", LARGE_FONT)
 
     def draw_screen(self):
         # to add logo of game above buttons
@@ -24,7 +26,7 @@ class MainMenu(BaseScreen):
             self.game_state_manager.set_state("rules")
 
         if self.exit_button.is_pressed():
-            pygame.quit()
+            Quit().quit()
 
 
 if __name__ == "__main__":

@@ -1,11 +1,15 @@
+import sys
+import pygame
 from src.game_config.button import Button
 from src.game_config.global_config import *
-import pygame
 
 
 class Draw:
-    def __init__(self, screen):
+    def __init__(self, game_state_manager, screen):
+        self.game_state_manager = game_state_manager
         self.screen = screen
+        self.next_question_button = Button(1050, 650, MEDIUM_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT, "Next Question",
+                                           SMALL_FONT)
 
     def render_text(self, text, font_size, pos):
         font = pygame.font.Font(FONT, font_size)
@@ -23,8 +27,18 @@ class Draw:
             self.screen.blit(rendered_line, render_line_rect)
 
     def draw_next_question_button(self):
-        next_question_button = Button(1075, 650, SMALL_BUTTON_WIDTH, 50, "Next Question", SMALL_FONT)
-        self.screen.blit(next_question_button.image, next_question_button.rect)
+        self.screen.blit(self.next_question_button.image, self.next_question_button.rect)
+
+    def check_button_press(self):
+        if self.next_question_button.is_pressed():
+            self.game_state_manager.set_state("question")
+
+
+class Quit:
+    @staticmethod
+    def quit():
+        pygame.quit()
+        sys.exit()
 
 
 if __name__ == "__main__":

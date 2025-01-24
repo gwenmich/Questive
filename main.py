@@ -1,10 +1,11 @@
 from db.db_utils import DbConnection
 from src.clues import Clues
-from src.event_handler import EventHandler
-from src.game_config.utils import Draw
+from src.game_config.utils import Draw, Quit
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
-from src.screens.game_over import GameOver
+from src.screens.arrest_suspect import ArrestSuspect
+from src.screens.game_lost import GameLost
+from src.screens.game_won import GameWon
 from src.screens.main_menu import MainMenu
 from src.screens.rules import Rules
 from src.screens.questions import Question
@@ -21,18 +22,20 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
 
-        self.draw = Draw(self.screen)
+        self.game_state_manager = GameStateManager("main_menu")
+
+        self.draw = Draw(self.game_state_manager, self.screen)
         self.murderer = DbConnection().get_murderer()
         self.clues = Clues(self.murderer)
         self.timer = Timer(self.draw)
 
-        self.game_state_manager = GameStateManager("main_menu")
-
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues, self.murderer)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
-        self.rules = Rules(self.screen, self.game_state_manager, self.draw)
+        self.rules = Rules(self.screen, self.game_state_manager, self.draw, self.timer)
         self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer)
-        self.game_over = GameOver(self.screen, self.game_state_manager, self.draw)
+        self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw)
+        self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
+        self.game_won = GameWon(self.screen, self.game_state_manager, self.draw)
         self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
 
         self.states = {
@@ -41,17 +44,18 @@ class Game:
             "question": self.question,
             "wrong_answer": self.wrong_answer,
             "suspects": self.suspects,
-            "game_over": self.game_over
+            "arrest_suspect": self.suspects,
+            "self.game_won": self.game_won,
+            "game_lost": self.game_lost
         }
-
-        self.event_handler = EventHandler(self.game_state_manager, self.timer, self.suspects)
 
     def run(self):
         while True:
-            self.screen.fill(BLACK)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    Quit().quit()
 
-            # calls the central event handler for any state
-            self.event_handler.handle_events()
+            self.screen.fill(BLACK)
 
             # returns current state and runs that state
             self.states[self.game_state_manager.get_state()].run()

@@ -1,7 +1,7 @@
 from src.screens.base_screen import BaseScreen
 
 
-class GameOver(BaseScreen):
+class GameWon(BaseScreen):
 
     def run(self):
         pass

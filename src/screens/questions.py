@@ -62,7 +62,8 @@ class Question(BaseScreen):
         for button in self.buttons:
             if button.is_pressed():
                 if button.text == self.correct_answers[self.index]:
-                    print("The player chose the CORRECT answer!")
+                    print(
+                        f"Q{self.index + 1}: The player chose the CORRECT answer! Correct answer was {self.correct_answers[self.index]}")
                     self.game_state_manager.set_state("suspects")
                     self.index += 1
                     self.create_buttons()
@@ -70,7 +71,7 @@ class Question(BaseScreen):
                 elif button.text in self.incorrect_answers[self.index]:
                     if button.is_pressed():
                         print(
-                            f"The player chose the INCORRECT answer. Correct answer was {self.correct_answers[self.index]}")
+                            f"Q{self.index + 1}: The player chose the INCORRECT answer. Correct answer was {self.correct_answers[self.index]}")
                         self.game_state_manager.set_state("wrong_answer")
                         self.index += 1
                         self.create_buttons()
@@ -79,11 +80,14 @@ class Question(BaseScreen):
         if self.index < len(self.questions):
             self.display_question()
             self.display_buttons()
+            self.checks_answer_pressed()
+        else:
+            print('arrest') # used in current debugging, can be deleted after
+            self.game_state_manager.set_state("arrest_suspect")
 
     def run(self):
         self.timer.draw_timer()
         self.checks_no_of_questions()
-        self.checks_answer_pressed()
 
 
 if __name__ == "main__":

@@ -57,25 +57,33 @@ class Question(BaseScreen):
             button = Button(x, y, width, height, answer, MEDIUM_FONT)
             self.buttons.append(button)
 
-    def run(self):
-        self.timer.draw_timer()
+    # for each button, a different state is set depending on correct/incorrect answer
+    def checks_answer_pressed(self):
+        for button in self.buttons:
+            if button.is_pressed():
+                if button.text == self.correct_answers[self.index]:
+                    print("The player chose the CORRECT answer!")
+                    self.game_state_manager.set_state("suspects")
+                    self.index += 1
+                    self.create_buttons()
 
+                elif button.text in self.incorrect_answers[self.index]:
+                    if button.is_pressed():
+                        print(
+                            f"The player chose the INCORRECT answer. Correct answer was {self.correct_answers[self.index]}")
+                        self.game_state_manager.set_state("wrong_answer")
+                        self.index += 1
+                        self.create_buttons()
+
+    def checks_no_of_questions(self):
         if self.index < len(self.questions):
             self.display_question()
             self.display_buttons()
 
-        for button in self.buttons:
-            if button.text == self.correct_answers[self.index]:
-                if button.is_pressed():
-                    self.game_state_manager.set_state("suspects")
-                    self.index += 1
-                    self.create_buttons()
-
-            elif button.text in self.incorrect_answers[self.index]:
-                if button.is_pressed():
-                    self.game_state_manager.set_state("suspects")
-                    self.index += 1
-                    self.create_buttons()
+    def run(self):
+        self.timer.draw_timer()
+        self.checks_no_of_questions()
+        self.checks_answer_pressed()
 
 
 if __name__ == "main__":

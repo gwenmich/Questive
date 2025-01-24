@@ -1,4 +1,4 @@
-from src.game_config.global_config import WHITE, DARK_GREY, LARGE_FONT
+from src.game_config.global_config import LARGE_FONT
 from src.screens.base_screen import BaseScreen
 from src.game_config.button import Button
 import pygame
@@ -7,8 +7,8 @@ class MainMenu(BaseScreen):
 
     def __init__(self, display, game_state_manager, draw):
         super().__init__(display, game_state_manager, draw)
-        self.play_button = Button(550, 360, 200, 80, WHITE, DARK_GREY, "Play", LARGE_FONT)
-        self.exit_button = Button(550, 490, 200, 80, WHITE, DARK_GREY, "Exit", LARGE_FONT)
+        self.play_button = Button(550, 360, 200, 80, "Play", LARGE_FONT)
+        self.exit_button = Button(550, 490, 200, 80, "Exit", LARGE_FONT)
 
 
     def draw_screen(self):

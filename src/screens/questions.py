@@ -5,6 +5,7 @@ from src.game_config.button import Button
 from src.screens.base_screen import BaseScreen
 import pygame
 
+
 class Question(BaseScreen):
     def __init__(self, display, game_state_manager, draw, timer):
         super().__init__(display, game_state_manager, draw)
@@ -23,7 +24,6 @@ class Question(BaseScreen):
         self.get_question_data()
         self.create_buttons()
 
-
     def get_question_data(self):
         for question in self.question_data:
             self.questions.append(question["question"])
@@ -32,7 +32,6 @@ class Question(BaseScreen):
 
             all_answers = [question["correct_answer"]] + question["incorrect_answers"]
             self.question_answers.append(all_answers)
-
 
     def display_question(self):
         if len(self.questions[self.index]) > 50:
@@ -44,23 +43,20 @@ class Question(BaseScreen):
         else:
             self.draw.render_text(self.questions[self.index], MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
-
     def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
-
 
     def create_buttons(self):
         self.buttons = []
         random.shuffle(self.question_answers[self.index])
 
         for i, answer in enumerate(self.question_answers[self.index]):
-            x = SCREEN_WIDTH//2 - 400
+            x = SCREEN_WIDTH // 2 - 400
             y = 250 + i * 80
             width, height = 800, 50
-            button = Button(x, y, width, height, WHITE, DARK_GREY, answer, MEDIUM_FONT)
+            button = Button(x, y, width, height, answer, MEDIUM_FONT)
             self.buttons.append(button)
-
 
     def run(self):
         self.timer.draw_timer()

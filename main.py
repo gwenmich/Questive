@@ -23,22 +23,22 @@ class Game:
 
         self.game_state_manager = GameStateManager("main_menu")
 
-        self.draw = Draw(self.screen)
-        self.button_handler = ButtonHandler(self.game_state_manager, self.screen)
         self.murderer = DbConnection().get_murderer()
         self.clues = Clues(self.murderer)
+        self.draw = Draw(self.screen)
+        self.button_handler = ButtonHandler(self.game_state_manager, self.screen)
         self.timer = Timer(self.draw)
 
-        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues,
-                                 self.murderer, self.button_handler)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw, self.timer)
-        self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer,
+        self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
+        self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
                                         self.button_handler)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.question, self.clues,
+                                 self.murderer, self.button_handler)
         self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw)
         self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
         self.game_won = GameWon(self.screen, self.game_state_manager, self.draw)
-        self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
 
         self.states = {
             "main_menu": self.main_menu,
@@ -46,7 +46,7 @@ class Game:
             "question": self.question,
             "wrong_answer": self.wrong_answer,
             "suspects": self.suspects,
-            "arrest_suspect": self.suspects,
+            "arrest_suspect": self.arrest_suspect,
             "self.game_won": self.game_won,
             "game_lost": self.game_lost
         }

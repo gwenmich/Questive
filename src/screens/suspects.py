@@ -29,9 +29,11 @@ class Suspects(BaseScreen):
             self.active_clue = f"Clue: {self.clues.get_clue()}"
         self.draw.render_text(self.active_clue, MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
 
-    def draw_text_guidance(self):
-        text = "Click on a suspect to eliminate them"
-        self.draw.render_text(text, SMALL_FONT, (SCREEN_WIDTH // 2, 165))
+    def draw_info_text(self):
+        info_text = "Click on a suspect to eliminate them"
+        ready_to_arrest_text = "Ready to arrest the suspect?"
+        self.draw.render_text(info_text, SMALL_FONT, (SCREEN_WIDTH // 2, 165))
+        self.draw.render_text(ready_to_arrest_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 625))
 
     @staticmethod
     def get_suspects():
@@ -42,7 +44,8 @@ class Suspects(BaseScreen):
         all_suspects = self.get_suspects()
 
         n = 0
-        x = 210
+        x_starting_pos = 235
+        x = x_starting_pos
         y = 350
         suspects_per_row = 5
 
@@ -50,7 +53,7 @@ class Suspects(BaseScreen):
             if n < suspects_per_row:
                 pass
             elif n == 5:
-                x = 210
+                x = x_starting_pos
                 y = 550
             self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
             suspect_img = pygame.image.load(f"assets/suspects/{0}.png").convert_alpha()
@@ -66,7 +69,7 @@ class Suspects(BaseScreen):
         self.timer.draw_timer()
         self.draw_correct_answer()
         self.draw_clue()
-        self.draw_text_guidance()
+        self.draw_info_text()
         self.draw_suspects()
         self.button_handler.arrest()
 

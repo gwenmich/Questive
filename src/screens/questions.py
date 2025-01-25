@@ -33,14 +33,16 @@ class Question(BaseScreen):
             self.question_answers.append(all_answers)
 
     def display_question(self):
+        part_0 = f"Q{self.index + 1}: "
         if len(self.questions[self.index]) > 50:
             split_question = self.questions[self.index].rfind(" ", 0, 50)
-            part_1 = self.questions[self.index][:split_question].strip()
+            part_1 = part_0 + self.questions[self.index][:split_question].strip()
             part_2 = self.questions[self.index][split_question:].strip()
             self.draw.render_text(part_1, MEDIUM_FONT, (SCREEN_WIDTH // 2, 150))
             self.draw.render_text(part_2, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
         else:
-            self.draw.render_text(self.questions[self.index], MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
+            short_question = part_0 + self.questions[self.index]
+            self.draw.render_text(short_question, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
     def display_buttons(self):
         for button in self.buttons:

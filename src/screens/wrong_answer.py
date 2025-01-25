@@ -1,5 +1,8 @@
+import pygame.display
+
 from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
 from src.screens.base_screen import BaseScreen
+import random
 
 
 class WrongAnswer(BaseScreen):
@@ -8,12 +11,19 @@ class WrongAnswer(BaseScreen):
         self.timer = timer
         self.question = question
         self.button_handler = button_handler
-        self.text = "Wrong answer....the murderer is on the loose. Try again"
+        self.text = [
+            "Wrong answer. The killer heard you...",
+            "Wrong. The killer is one step closer to finding you!",
+            "You're running out of places to hide..."
+        ]
+
+        self.random_text = None
 
     def draw_screen(self):
+        if not self.random_text:
+            self.random_text = random.choice(self.text)
         # ------ Temporary placeholder----- ----------
-        self.draw.render_text(self.text, MEDIUM_FONT,
-                              (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        self.draw.render_text(self.random_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 
     def check_question_status(self):
         if self.question.index < len(self.question.questions):

@@ -11,6 +11,7 @@ class Question(BaseScreen):
         self.timer = timer
         self.buttons = []
 
+        # self.apidata = ApiData()
         self.data = decode_strings()
         self.question_data = self.data["results"]
         self.questions = []
@@ -32,21 +33,31 @@ class Question(BaseScreen):
             all_answers = [question["correct_answer"]] + question["incorrect_answers"]
             self.question_answers.append(all_answers)
 
+
+    # splits question text into 2 rows
+    def split_long_text(self, char_split_length, part0):
+        split_question = self.questions[self.index].rfind(" ", 0, char_split_length)
+        part_1 = part0 + self.questions[self.index][:split_question].strip()
+        part_2 = self.questions[self.index][split_question:].strip()
+        return part_1, part_2
+
+
+
     def display_question(self):
         part_0 = f"Q{self.index + 1}: "
-        if len(self.questions[self.index]) > 50:
-            split_question = self.questions[self.index].rfind(" ", 0, 50)
-            part_1 = part_0 + self.questions[self.index][:split_question].strip()
-            part_2 = self.questions[self.index][split_question:].strip()
-            self.draw.render_text(part_1, MEDIUM_FONT, (SCREEN_WIDTH // 2, 150))
-            self.draw.render_text(part_2, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
+        if len(self.questions[self.index]) > 60:
+            part_1, part_2 = self.split_long_text(60, part_0)
+            self.draw.render_text(part_1, MEDIUM_FONT, (SCREEN_WIDTH//2, 150))
+            self.draw.render_text(part_2, MEDIUM_FONT, (SCREEN_WIDTH//2, 180))
         else:
             short_question = part_0 + self.questions[self.index]
             self.draw.render_text(short_question, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
+
     def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
+
 
     def create_buttons(self):
         # checks against number of available questions
@@ -59,7 +70,10 @@ class Question(BaseScreen):
                 x = SCREEN_WIDTH // 2 - 400
                 y = 250 + i * 80
                 width, height = 800, 50
-                button = Button(x, y, width, height, answer, MEDIUM_FONT)
+                if len(answer) > 50:
+                    button = Button(x, y, width, height, answer, SMALL_FONT_BUTTON)
+                else:
+                    button = Button(x, y, width, height, answer, MEDIUM_FONT)
                 self.buttons.append(button)
 
     # for each button, a different state is set depending on correct/incorrect answer

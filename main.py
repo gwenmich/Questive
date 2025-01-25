@@ -22,8 +22,8 @@ class Game:
 
         self.game_state_manager = GameStateManager("main_menu")
 
-        self.draw = Draw(self.game_state_manager, self.screen)
-        self.button_handler = ButtonHandler(self.game_state_manager, self.draw)
+        self.draw = Draw(self.screen)
+        self.button_handler = ButtonHandler(self.game_state_manager, self.screen)
         self.murderer = DbConnection().get_murderer()
         self.clues = Clues(self.murderer)
         self.timer = Timer(self.draw)

@@ -11,11 +11,8 @@ def quit_app():
 
 
 class Draw:
-    def __init__(self, game_state_manager, screen):
-        self.game_state_manager = game_state_manager
+    def __init__(self, screen):
         self.screen = screen
-        self.next_question_button = Button(1050, 650, MEDIUM_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT, "Next Question",
-                                           SMALL_FONT)
 
     def render_text(self, text, font_size, pos):
         font = pygame.font.Font(FONT, font_size)
@@ -32,18 +29,26 @@ class Draw:
             y_pos += 28
             self.screen.blit(rendered_line, render_line_rect)
 
-    def draw_next_question_button(self):
-        self.screen.blit(self.next_question_button.image, self.next_question_button.rect)
-
 
 class ButtonHandler:
-    def __init__(self, game_state_manager, draw):
+    def __init__(self, game_state_manager, screen):
         self.game_state_manager = game_state_manager
-        self.draw = draw
+        self.screen = screen
+        self.next_question_button = Button(1050, 650, MEDIUM_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT, "Next Question",
+                                           SMALL_FONT)
+        self.arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH,
+                                    SMALL_BUTTON_HEIGHT,
+                                    "Arrest Suspect", SMALL_FONT)
 
-    def check_button_press(self):
-        if self.draw.next_question_button.is_pressed():
+    def next_question(self):
+        self.screen.blit(self.next_question_button.image, self.next_question_button.rect)
+        if self.next_question_button.is_pressed():
             self.game_state_manager.set_state("question")
+
+    def arrest(self):
+        self.screen.blit(self.arrest_button.image, self.arrest_button.rect)
+        if self.arrest_button.is_pressed():
+            self.game_state_manager.set_state("arrest_suspect")
 
 
 if __name__ == "__main__":

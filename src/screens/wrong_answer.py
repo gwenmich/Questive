@@ -19,6 +19,7 @@ class WrongAnswer(BaseScreen):
         self.timer.draw_timer()
         self.draw.draw_next_question_button()
         self.draw_screen()
+        self.draw.check_button_press()
 
 
 if __name__ == "__main__":

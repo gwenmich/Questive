@@ -1,16 +1,17 @@
 import pygame
 from db.db_utils import DbConnection
-from src.game_config.button import Button
-from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH, SMALL_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT
+from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH
 from src.screens.base_screen import BaseScreen
 
 
 class Suspects(BaseScreen):
-    def __init__(self, display, game_state_manager, draw, timer, clues, murderer):
+    def __init__(self, display, game_state_manager, draw, timer, question, clues, murderer, button_handler):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
+        self.question = question
         self.clues = clues
         self.murderer = murderer
+        self.button_handler = button_handler
         self.active_clue = ""
 
     def draw_correct_answer(self):
@@ -57,11 +58,9 @@ class Suspects(BaseScreen):
             x += 200
             n += 1
 
-    def draw_arrest_button(self):
-        arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH,
-                               SMALL_BUTTON_HEIGHT,
-                               "Arrest Suspect", SMALL_FONT)
-        self.display.blit(arrest_button.image, arrest_button.rect)
+    def check_question_status(self):
+        if self.question.index < len(self.question.questions):
+            self.button_handler.next_question()
 
     def draw_screen(self):
         self.timer.draw_timer()
@@ -69,12 +68,11 @@ class Suspects(BaseScreen):
         self.draw_clue()
         self.draw_text_guidance()
         self.draw_suspects()
-        self.draw_arrest_button()
-        self.draw.draw_next_question_button()
+        self.button_handler.arrest()
 
     def run(self):
         self.draw_screen()
-        self.draw.check_button_press()
+        self.check_question_status()
 
 
 if __name__ == "__main__":

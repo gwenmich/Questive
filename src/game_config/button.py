@@ -31,10 +31,7 @@ class Button:
         position = pygame.mouse.get_pos()
         pressed = pygame.mouse.get_pressed()
         if self.rect.collidepoint(position):
-            if pressed[0]:
-                return True
-            else:
-                return False
+            return pressed[0]
         return False
 
     # splits answer text when longer than 50 chars at closest space char

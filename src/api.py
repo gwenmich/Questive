@@ -29,7 +29,7 @@ def decode_strings():
 #         {'type': 'multiple',
 #          'difficulty': 'medium',
 #          'category': 'General Knowledge',
-#          'question': 'What is the Swedish word for &quot;window&quot; and what is the most famous swedish outlet for buying furniture?',
+#          'question': 'Dihydrogen monoxide was banned due to health risks after being discovered in 1983 inside swimming pools and drinking water what do you think?',
 #          'correct_answer': 'F&ouml;nster which is the equivalent of window in swedish and I love Ikea',
 #          'incorrect_answers': ['H&aring;l', 'Sk&auml;rm', 'Ruta']},
 #

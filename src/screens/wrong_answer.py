@@ -1,8 +1,7 @@
-import pygame.display
-
 from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
 from src.screens.base_screen import BaseScreen
 import random
+import itertools
 
 
 class WrongAnswer(BaseScreen):
@@ -16,14 +15,15 @@ class WrongAnswer(BaseScreen):
             "Wrong. The killer is one step closer to finding you!",
             "You're running out of places to hide..."
         ]
+        self.text_iterator = itertools.cycle(self.text)
 
-        self.random_text = None
+    def next_message(self):
+        message = next(self.text_iterator)
+        return message
 
-    def draw_screen(self):
-        if not self.random_text:
-            self.random_text = random.choice(self.text)
-        # ------ Temporary placeholder----- ----------
-        self.draw.render_text(self.random_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
+    def draw_screen(self, text):
+        self.draw.render_text(text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 
     def check_question_status(self):
         if self.question.index < len(self.question.questions):
@@ -34,7 +34,7 @@ class WrongAnswer(BaseScreen):
 
     def run(self):
         self.timer.draw_timer()
-        self.draw_screen()
+        self.draw_screen(self.next_message())
         self.check_question_status()
 
 

@@ -80,14 +80,11 @@ class Question(BaseScreen):
                     self.index += 1
                     self.create_buttons()
 
-    def checks_no_of_questions(self):
+    def run(self):
+        self.timer.draw_timer()
         self.display_buttons()
         self.display_question()
         self.checks_answer_pressed()
-
-    def run(self):
-        self.timer.draw_timer()
-        self.checks_no_of_questions()
 
 
 if __name__ == "main__":

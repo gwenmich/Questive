@@ -56,7 +56,7 @@ class Suspects(BaseScreen):
                 x = x_starting_pos
                 y = 550
             self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
-            suspect_img = pygame.image.load(f"assets/suspects/{0}.png").convert_alpha()
+            suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
             suspect_img_rect = suspect_img.get_rect(topleft = (x - 60, y - 140))
             self.display.blit(suspect_img, suspect_img_rect)
             x += 200

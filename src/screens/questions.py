@@ -34,21 +34,34 @@ class Question(BaseScreen):
             self.question_answers.append(all_answers)
 
 
-    # splits question text into 2 rows
+    # splits question text into rows to fit on screen
     def split_long_text(self, char_split_length, part0):
+        parts = []
         split_question = self.questions[self.index].rfind(" ", 0, char_split_length)
         part_1 = part0 + self.questions[self.index][:split_question].strip()
+        parts.append(part_1)
         part_2 = self.questions[self.index][split_question:].strip()
-        return part_1, part_2
+        if len(part_2) > char_split_length:
+            split_2 = part_2.rfind(" ", 0, char_split_length)
+            part_2_1 = part_2[:split_2].strip()
+            parts.append(part_2_1)
+            part_2_2 = part_2[split_2:].strip()
+            parts.append(part_2_2)
+            return parts
+        else:
+            parts.append(part_2)
+            return parts
 
 
 
     def display_question(self):
         part_0 = f"Q{self.index + 1}: "
         if len(self.questions[self.index]) > 60:
-            part_1, part_2 = self.split_long_text(60, part_0)
-            self.draw.render_text(part_1, MEDIUM_FONT, (SCREEN_WIDTH//2, 150))
-            self.draw.render_text(part_2, MEDIUM_FONT, (SCREEN_WIDTH//2, 180))
+            parts = self.split_long_text(60, part_0)
+            i = 0
+            for part in parts:
+                self.draw.render_text(part, MEDIUM_FONT, (SCREEN_WIDTH//2, 150 + i))
+                i += 30
         else:
             short_question = part_0 + self.questions[self.index]
             self.draw.render_text(short_question, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))

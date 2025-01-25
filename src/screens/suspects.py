@@ -58,12 +58,12 @@ class Suspects(BaseScreen):
             suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
             self.display.blit(suspect_img, suspect_img_rect)
 
-            self.check_guess(suspect_img_rect, n)
+            self.check_button_press(suspect_img_rect, n)
 
             x += 200
             n += 1
 
-    def check_guess(self, suspect_img_rect, n):
+    def check_button_press(self, suspect_img_rect, n):
         if self.game_state_manager.get_state() == "suspects":
             # could potentially add transparency settings in here?--------------------
             pass

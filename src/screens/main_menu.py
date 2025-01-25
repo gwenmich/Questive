@@ -1,7 +1,5 @@
-from src.game_config.global_config import LARGE_FONT, MEDIUM_BUTTON_WIDTH, SCREEN_WIDTH, MEDIUM_BUTTON_HEIGHT
-from src.game_config.utils import Quit
 from src.screens.base_screen import BaseScreen
-from src.game_config.button import Button
+from src.game_config.utils import *
 
 
 class MainMenu(BaseScreen):
@@ -26,7 +24,7 @@ class MainMenu(BaseScreen):
             self.game_state_manager.set_state("rules")
 
         if self.exit_button.is_pressed():
-            Quit().quit()
+            quit_app()
 
 
 if __name__ == "__main__":

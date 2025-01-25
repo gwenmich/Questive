@@ -2,24 +2,19 @@ import requests
 import html
 
 
-# class ApiData:
+class ApiData:
 
-    # def __init__(self):
-    #     self.endpoint = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy"
-    #     self.response = requests.get(self.endpoint)
-    #     self.data = self.response.json()
+    def __init__(self, no_questions, difficulty):
+        self.endpoint = f"https://opentdb.com/api.php?amount={no_questions}&category=9&difficulty={difficulty}"
+        self.response = requests.get(self.endpoint)
+        self.data = self.response.json()
 
-endpoint = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy"
-response = requests.get(endpoint)
-data = response.json()
-
-
-def decode_strings():
-    for question in data["results"]:
-        question["question"] = html.unescape(question["question"])
-        question["correct_answer"] = html.unescape(question["correct_answer"])
-        question["incorrect_answers"] = [html.unescape(ans) for ans in question["incorrect_answers"]]
-    return data
+    def decode_strings(self):
+        for question in self.data["results"]:
+            question["question"] = html.unescape(question["question"])
+            question["correct_answer"] = html.unescape(question["correct_answer"])
+            question["incorrect_answers"] = [html.unescape(ans) for ans in question["incorrect_answers"]]
+        return self.data
 
 
 # test data

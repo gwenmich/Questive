@@ -1,6 +1,6 @@
 from db.db_utils import DbConnection
 from src.clues import Clues
-from src.game_config.utils import Draw, Quit
+from src.game_config.utils import *
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
 from src.screens.arrest_suspect import ArrestSuspect
@@ -13,8 +13,6 @@ from src.screens.suspects import Suspects
 from src.screens.timer import Timer
 from src.screens.wrong_answer import WrongAnswer
 
-import pygame
-
 
 class Game:
     def __init__(self):
@@ -25,14 +23,17 @@ class Game:
         self.game_state_manager = GameStateManager("main_menu")
 
         self.draw = Draw(self.game_state_manager, self.screen)
+        self.button_handler = ButtonHandler(self.game_state_manager, self.draw)
         self.murderer = DbConnection().get_murderer()
         self.clues = Clues(self.murderer)
         self.timer = Timer(self.draw)
 
-        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues, self.murderer)
+        self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.clues,
+                                 self.murderer, self.button_handler)
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw, self.timer)
-        self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer)
+        self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer,
+                                        self.button_handler)
         self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw)
         self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
         self.game_won = GameWon(self.screen, self.game_state_manager, self.draw)
@@ -53,7 +54,7 @@ class Game:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    Quit().quit()
+                    quit_app()
 
             self.screen.fill(BLACK)
 

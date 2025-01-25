@@ -4,6 +4,12 @@ from src.game_config.button import Button
 from src.game_config.global_config import *
 
 
+# called from main application quit and exit button
+def quit_app():
+    pygame.quit()
+    sys.exit()
+
+
 class Draw:
     def __init__(self, game_state_manager, screen):
         self.game_state_manager = game_state_manager
@@ -29,16 +35,15 @@ class Draw:
     def draw_next_question_button(self):
         self.screen.blit(self.next_question_button.image, self.next_question_button.rect)
 
+
+class ButtonHandler:
+    def __init__(self, game_state_manager, draw):
+        self.game_state_manager = game_state_manager
+        self.draw = draw
+
     def check_button_press(self):
-        if self.next_question_button.is_pressed():
+        if self.draw.next_question_button.is_pressed():
             self.game_state_manager.set_state("question")
-
-
-class Quit:
-    @staticmethod
-    def quit():
-        pygame.quit()
-        sys.exit()
 
 
 if __name__ == "__main__":

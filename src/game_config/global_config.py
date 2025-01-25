@@ -4,7 +4,7 @@ FPS = 60
 
 FONT = "assets/font/PressStart2P-Regular.ttf"
 SMALL_FONT = 10
-SMALL_FONT_BUTTON = 15
+SMALL_MED_FONT = 15
 MEDIUM_FONT = 20
 LARGE_FONT = 25
 

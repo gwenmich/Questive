@@ -1,5 +1,5 @@
+from src.api import ApiData
 from src.game_config.global_config import *
-from src.api import decode_strings
 import random
 from src.game_config.button import Button
 from src.screens.base_screen import BaseScreen
@@ -11,8 +11,8 @@ class Question(BaseScreen):
         self.timer = timer
         self.buttons = []
 
-        # self.apidata = ApiData()
-        self.data = decode_strings()
+        self.api_data = ApiData(10, "easy")
+        self.data = self.api_data.decode_strings()
         self.question_data = self.data["results"]
         self.questions = []
         self.correct_answers = []
@@ -32,7 +32,6 @@ class Question(BaseScreen):
 
             all_answers = [question["correct_answer"]] + question["incorrect_answers"]
             self.question_answers.append(all_answers)
-
 
     # splits question text into rows to fit on screen
     def split_long_text(self, char_split_length, part0):
@@ -58,7 +57,7 @@ class Question(BaseScreen):
             parts = self.split_long_text(60, part_0)
             i = 0
             for part in parts:
-                self.draw.render_text(part, MEDIUM_FONT, (SCREEN_WIDTH//2, 150 + i))
+                self.draw.render_text(part, MEDIUM_FONT, (SCREEN_WIDTH // 2, 150 + i))
                 i += 30
 
         else:

@@ -10,7 +10,7 @@ from src.screens.main_menu import MainMenu
 from src.screens.rules import Rules
 from src.screens.questions import Question
 from src.screens.suspects import Suspects
-from src.screens.timer import Timer
+from src.timer import Timer
 from src.screens.wrong_answer import WrongAnswer
 
 
@@ -35,8 +35,10 @@ class Game:
         self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
                                         self.button_handler)
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.timer, self.question, self.clues,
-                                 self.murderer, self.button_handler)
-        self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw)
+                                 self.murderer,
+                                 self.button_handler)
+        self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw, self.timer,
+                                            self.button_handler, self.suspects)
         self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
         self.game_won = GameWon(self.screen, self.game_state_manager, self.draw)
 
@@ -47,7 +49,7 @@ class Game:
             "wrong_answer": self.wrong_answer,
             "suspects": self.suspects,
             "arrest_suspect": self.arrest_suspect,
-            "self.game_won": self.game_won,
+            "game_won": self.game_won,
             "game_lost": self.game_lost
         }
 

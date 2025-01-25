@@ -1,6 +1,6 @@
 import pygame
 from db.db_utils import DbConnection
-from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH
+from src.game_config.global_config import SMALL_FONT, MEDIUM_FONT, SCREEN_WIDTH, SMALL_MED_FONT
 from src.screens.base_screen import BaseScreen
 
 
@@ -18,10 +18,6 @@ class Suspects(BaseScreen):
         text = "Correct Answer!"
         self.draw.render_text(text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 50))
 
-    def draw_wrong_answer(self):
-        text = "Wrong Answer! No clue this time"
-        self.draw.render_text(text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 50))
-
     # gets random clue for Murderer
     def draw_clue(self):
         # returns a new clue each time the suspect screen is loaded
@@ -32,7 +28,7 @@ class Suspects(BaseScreen):
     def draw_info_text(self):
         info_text = "Click on a suspect to eliminate them"
         ready_to_arrest_text = "Ready to arrest the suspect?"
-        self.draw.render_text(info_text, SMALL_FONT, (SCREEN_WIDTH // 2, 165))
+        self.draw.render_text(info_text, SMALL_MED_FONT, (SCREEN_WIDTH // 2, 165))
         self.draw.render_text(ready_to_arrest_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 625))
 
     @staticmethod
@@ -40,6 +36,7 @@ class Suspects(BaseScreen):
         suspects = DbConnection().get_suspects()
         return suspects
 
+    # method also used in arrest_suspect
     def draw_suspects(self):
         all_suspects = self.get_suspects()
 
@@ -55,12 +52,30 @@ class Suspects(BaseScreen):
             elif n == 5:
                 x = x_starting_pos
                 y = 550
+
             self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
             suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
-            suspect_img_rect = suspect_img.get_rect(topleft = (x - 60, y - 140))
+            suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
             self.display.blit(suspect_img, suspect_img_rect)
+
+            self.check_button_press(suspect_img_rect, n)
+
             x += 200
             n += 1
+
+    def check_button_press(self, suspect_img_rect, n):
+        if self.game_state_manager.get_state() == "suspects":
+            # could potentially add transparency settings in here?--------------------
+            pass
+        # Checks when the mouse is pressed - not sure this is in right place - potential refactoring -----------
+        elif self.game_state_manager.get_state() == "arrest_suspect":
+            if suspect_img_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed()[0]:
+                if self.murderer[0]["suspect_id"] == DbConnection().get_suspects()[n]["suspect_id"]:
+                    print("The murder has been caught!")
+                    self.game_state_manager.set_state("game_won")
+                else:
+                    print("Incorrect arrest")
+                    self.game_state_manager.set_state("game_lost")
 
     def check_question_status(self):
         if self.question.index < len(self.question.questions):

@@ -52,8 +52,6 @@ class Question(BaseScreen):
             parts.append(part_2)
             return parts
 
-
-
     def display_question(self):
         part_0 = f"Q{self.index + 1}: "
         if len(self.questions[self.index]) > 60:
@@ -62,15 +60,14 @@ class Question(BaseScreen):
             for part in parts:
                 self.draw.render_text(part, MEDIUM_FONT, (SCREEN_WIDTH//2, 150 + i))
                 i += 30
+
         else:
             short_question = part_0 + self.questions[self.index]
             self.draw.render_text(short_question, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
-
     def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
-
 
     def create_buttons(self):
         # checks against number of available questions
@@ -84,7 +81,7 @@ class Question(BaseScreen):
                 y = 250 + i * 80
                 width, height = 800, 50
                 if len(answer) > 50:
-                    button = Button(x, y, width, height, answer, SMALL_FONT_BUTTON)
+                    button = Button(x, y, width, height, answer, SMALL_MED_FONT)
                 else:
                     button = Button(x, y, width, height, answer, MEDIUM_FONT)
                 self.buttons.append(button)

@@ -36,7 +36,7 @@ class ButtonHandler:
         self.screen = screen
         self.next_question_button = Button(1050, 650, MEDIUM_BUTTON_WIDTH, SMALL_BUTTON_HEIGHT, "Next Question",
                                            SMALL_FONT)
-        self.arrest_button = Button(SCREEN_WIDTH // 2 - SMALL_BUTTON_WIDTH // 2, 650, SMALL_BUTTON_WIDTH,
+        self.arrest_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 650, MEDIUM_BUTTON_WIDTH,
                                     SMALL_BUTTON_HEIGHT,
                                     "Arrest Suspect", SMALL_FONT)
 

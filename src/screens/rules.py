@@ -19,7 +19,7 @@ class Rules(BaseScreen):
             "the pub—from the trivia-obsessed know-it-all to the mysterious",
             "bartender.",
             "",
-            "Your mission: solve quizzes to uncover clues, eliminate",
+            "Your mission: solve 10 questions to uncover clues, eliminate",
             "suspects, and unmask the killer. Each correct answer gets",
             "you closer to the truth, but one wrong move, and you might",
             "be the next victim of the killer who hates bad answers.",

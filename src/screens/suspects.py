@@ -14,7 +14,7 @@ class Suspects:
     def draw_suspect(self, suspect, x, y, n):
         self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
         suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
-        suspect_img.set_alpha(suspect["alpha"]) # draw suspect with current alpha value
+        suspect_img.set_alpha(suspect["alpha"])  # draw suspect with current alpha value
         suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
         self.screen.blit(suspect_img, suspect_img_rect)
         return suspect_img_rect
@@ -53,13 +53,14 @@ class Suspects:
                     suspect["alpha"] = 255
 
 
-        # Checks when the mouse is pressed - not sure if this is in right place - potential refactoring -----------
+        # Checks when the mouse is pressed
         elif self.game_state_manager.get_state() == "arrest_suspect":
 
             if suspect_img_rect.collidepoint(position) and pressed[0]:
                 if self.murderer[0]["suspect_id"] == self.suspects[n]["suspect_id"]:
                     print("The murder has been caught!")
                     self.game_state_manager.set_state("game_won")
+
                 else:
                     print("Incorrect arrest")
                     self.game_state_manager.set_state("game_lost")

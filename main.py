@@ -41,14 +41,14 @@ class Game:
                                             self.clues, self.button_handler, self.suspects)
         self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw, self.timer, self.suspects)
         self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
-        self.game_won = GameWon(self.screen, self.game_state_manager, self.draw)
+        self.game_won = GameWon(self.screen, self.game_state_manager, self.draw, self.murderer, self.timer)
 
         self.states = {
             "main_menu": self.main_menu,
             "rules": self.rules,
             "question": self.question,
             "wrong_answer": self.wrong_answer,
-            "suspects": self.correct_answer,
+            "correct_answer": self.correct_answer,
             "arrest_suspect": self.arrest_suspect,
             "game_won": self.game_won,
             "game_lost": self.game_lost

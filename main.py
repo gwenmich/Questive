@@ -58,7 +58,7 @@ class Game:
 
     def play_music(self):
         if not self.music_playing:
-            pygame.mixer.music.load("music/mystery-box-v-draganov-main-version-00-40-18716.mp3")
+            pygame.mixer.music.load("assets/sound/mystery-box-v-draganov-main-version-00-40-18716.mp3")
             pygame.mixer.music.set_volume(0.2)
             pygame.mixer.music.play(-1)
             self.music_playing = True

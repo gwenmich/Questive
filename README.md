@@ -53,3 +53,6 @@ getting clues to help eliminate suspects.
 
 ***
 
+### Gameplay Mechanics:
+Questive uses mouse control throughout the game.
+

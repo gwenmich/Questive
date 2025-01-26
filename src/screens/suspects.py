@@ -47,7 +47,7 @@ class Suspects:
 
             if suspect_img_rect.collidepoint(position) and pressed[0]:
                 if suspect["alpha"] == 255:
-                    suspect["alpha"] = 150
+                    suspect["alpha"] = 100
 
                 else:
                     suspect["alpha"] = 255

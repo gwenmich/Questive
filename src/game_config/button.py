@@ -27,12 +27,14 @@ class Button:
             self.content_rect = self.content.get_rect(center=(self.width / 2, self.height / 2))
             self.image.blit(self.content, self.content_rect)
 
+
     def is_pressed(self):
         position = pygame.mouse.get_pos()
         pressed = pygame.mouse.get_pressed()
         if self.rect.collidepoint(position):
             return pressed[0]
         return False
+
 
     # splits answer text when longer than 50 chars at closest space char
     def split_long_text(self):
@@ -46,3 +48,7 @@ class Button:
             self.content_rect = self.content.get_rect(center=(self.width / 2, i))
             self.image.blit(self.content, self.content_rect)
             i += 20
+
+
+if __name__ == "__main__":
+    pass

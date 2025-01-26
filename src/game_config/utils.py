@@ -6,7 +6,6 @@ from src.game_config.global_config import *
 
 # called from main application quit and exit button
 def quit_app():
-    pygame.event.clear()  # Clears the event queue (which may build up over time until reboot)
     pygame.quit()
     sys.exit()
 

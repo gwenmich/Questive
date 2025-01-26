@@ -31,7 +31,7 @@ class Rules(BaseScreen):
             "Trivia Hollow needs you!"
         ]
 
-        self.draw.render_text_multiple_lines(text)
+        self.draw.render_text_multiple_lines(text, 125)
 
     def draw_button(self):
         self.display.blit(self.start_investigation_button.image, self.start_investigation_button.rect)

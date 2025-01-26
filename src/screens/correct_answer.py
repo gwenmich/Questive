@@ -3,15 +3,15 @@ from src.screens.base_screen import BaseScreen
 
 
 class CorrectAnswer(BaseScreen):
-    def __init__(self, display, game_state_manager, draw, timer, question, clues, button_handler, suspects):
+    def __init__(self, display, game_state_manager, draw, timer, question, clues, button_handler, suspects, event_handler):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
         self.question = question
         self.clues = clues
         self.button_handler = button_handler
         self.suspects = suspects
-        self.active_clue = ""
         self.draw_suspects = self.suspects.draw_suspects()
+        self.event_handler = event_handler
 
     def draw_correct_answer(self):
         text = "Correct Answer!"
@@ -19,9 +19,17 @@ class CorrectAnswer(BaseScreen):
 
     # draws random clue for the Murderer
     def draw_clue(self):
-        if self.active_clue == "":
-            self.active_clue = f"Clue: {self.clues.get_clue()}"
-        self.draw.render_text(self.active_clue, MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
+        # Retrieve the current clue
+        current_clue = self.event_handler.get_clue()
+
+        # If no clue is set, fetch and set a new clue
+        if not current_clue:
+            new_clue = f"Clue: {self.clues.get_clue()}"
+            self.event_handler.set_clue(new_clue)
+            print(f"Updated clue: {current_clue} (Type: {type(current_clue)})")
+
+        # Render the clue text
+        self.draw.render_text(str(current_clue), MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
 
     def draw_info_text(self):
         info_text = "Click on a suspect to eliminate them"

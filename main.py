@@ -1,5 +1,6 @@
 from db.db_utils import DbConnection
 from src.clues import Clues
+from src.game_config.event_handler import EventHandler
 from src.game_config.utils import *
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
@@ -33,12 +34,13 @@ class Game:
 
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw, self.timer)
-        self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer)
+        self.event_handler = EventHandler()
+        self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer, self.event_handler)
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.murderer)
         self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
                                         self.button_handler)
         self.correct_answer = CorrectAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
-                                            self.clues, self.button_handler, self.suspects)
+                                            self.clues, self.button_handler, self.suspects, self.event_handler)
         self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw, self.timer, self.suspects)
         self.game_lost = GameLost(self.screen, self.game_state_manager, self.draw)
         self.game_won = GameWon(self.screen, self.game_state_manager, self.draw, self.murderer, self.timer)
@@ -58,7 +60,7 @@ class Game:
 
     def play_music(self):
         if not self.music_playing:
-            pygame.mixer.music.load("music/mystery-box-v-draganov-main-version-00-40-18716.mp3")
+            pygame.mixer.music.load("assets/sound/mystery-box-v-draganov-main-version-00-40-18716.mp3")
             pygame.mixer.music.set_volume(0.2)
             pygame.mixer.music.play(-1)
             self.music_playing = True

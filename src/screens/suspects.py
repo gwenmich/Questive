@@ -13,7 +13,7 @@ class Suspects:
 
     def draw_suspect(self, suspect, x, y, n):
         self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
-        suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
+        suspect_img = pygame.image.load(f"assets/images/suspects/{n}.png").convert_alpha()
         suspect_img.set_alpha(suspect["alpha"])  # draw suspect with current alpha value
         suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
         self.screen.blit(suspect_img, suspect_img_rect)

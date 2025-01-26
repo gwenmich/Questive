@@ -8,7 +8,7 @@ class MainMenu(BaseScreen):
 
     def __init__(self, display, game_state_manager, draw):
         super().__init__(display, game_state_manager, draw)
-        self.logo_img = pygame.image.load("assets/questive_logo.png")
+        self.logo_img = pygame.image.load("assets/images/questive_logo.png")
         self.play_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 360, MEDIUM_BUTTON_WIDTH,
                                   MEDIUM_BUTTON_HEIGHT, "Play", LARGE_FONT)
         self.exit_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 490, MEDIUM_BUTTON_WIDTH,

@@ -43,7 +43,7 @@ class Suspects:
         position = pygame.mouse.get_pos()
         pressed = pygame.mouse.get_pressed()
 
-        if self.game_state_manager.get_state() == "suspects":
+        if self.game_state_manager.get_state() == "correct_answer":
 
             if suspect_img_rect.collidepoint(position) and pressed[0]:
                 if suspect["alpha"] == 255:

@@ -1,4 +1,3 @@
-from db.db_utils import DbConnection
 from src.game_config.global_config import SCREEN_WIDTH, MEDIUM_FONT, SMALL_MED_FONT
 from src.screens.base_screen import BaseScreen
 
@@ -16,11 +15,6 @@ class ArrestSuspect(BaseScreen):
         info_text = "Click on the suspect below to make the arrest"
         self.draw.render_text(heading_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
         self.draw.render_text(info_text, SMALL_MED_FONT, (SCREEN_WIDTH // 2, 165))
-
-    @staticmethod
-    def get_suspects():
-        suspects = DbConnection().get_suspects()
-        return suspects
 
     def draw_screen(self):
         self.timer.draw_timer()

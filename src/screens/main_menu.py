@@ -21,6 +21,7 @@ class MainMenu(BaseScreen):
         self.display.blit(self.play_button.image, self.play_button.rect)
         self.display.blit(self.exit_button.image, self.exit_button.rect)
 
+
     def run(self):
         self.draw_screen()
 

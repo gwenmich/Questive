@@ -6,10 +6,11 @@ from src.screens.base_screen import BaseScreen
 
 
 class Question(BaseScreen):
-    def __init__(self, display, game_state_manager, draw, timer):
+    def __init__(self, display, game_state_manager, draw, timer, event_handler):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
         self.buttons = []
+        self.event_handler = event_handler
 
         self.api_data = ApiData(10, "easy")
         self.data = self.api_data.decode_strings()
@@ -87,12 +88,14 @@ class Question(BaseScreen):
 
     # for each button, a different state is set depending on correct/incorrect answer
     def checks_answer_pressed(self):
+        # print(self.correct_answers[self.index]) # used for debugging/testing
         for button in self.buttons:
             if button.is_pressed():
                 if button.text == self.correct_answers[self.index]:
                     print(
                         f"Q{self.index + 1}: The player chose the CORRECT answer! Correct answer was {self.correct_answers[self.index]}")
                     self.game_state_manager.set_state("correct_answer")
+                    self.event_handler.set_clue("")
                     self.index += 1
                     self.create_buttons()
 

@@ -13,6 +13,7 @@ from src.screens.correct_answer import CorrectAnswer
 from src.screens.suspects import Suspects
 from src.timer import Timer
 from src.screens.wrong_answer import WrongAnswer
+import pygame
 
 
 class Game:

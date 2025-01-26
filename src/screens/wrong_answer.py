@@ -1,7 +1,6 @@
 from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
 from src.screens.base_screen import BaseScreen
 import random
-import itertools
 
 
 class WrongAnswer(BaseScreen):
@@ -15,15 +14,13 @@ class WrongAnswer(BaseScreen):
             "Wrong. The killer is one step closer to finding you!",
             "You're running out of places to hide..."
         ]
-        self.text_iterator = itertools.cycle(self.text)
 
-    def next_message(self):
-        message = next(self.text_iterator)
-        return message
+        self.message = random.choice(self.text)
 
 
     def draw_screen(self, text):
         self.draw.render_text(text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
 
     def check_question_status(self):
         if self.question.index < len(self.question.questions):
@@ -32,10 +29,12 @@ class WrongAnswer(BaseScreen):
             self.text = "Wrong answer..Times up..you must arrest a suspect"
             self.button_handler.arrest()
 
+
     def run(self):
         self.timer.draw_timer()
-        self.draw_screen(self.next_message())
+        self.draw_screen(self.message)
         self.check_question_status()
+
 
 
 if __name__ == "__main__":

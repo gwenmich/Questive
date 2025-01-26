@@ -1,5 +1,5 @@
 # Enter username and password below
-USER = "root"
-PASSWORD = "SQLadmin123!"
+USER = ""
+PASSWORD = ""
 HOST = "localhost"
 DATABASE = "questive"

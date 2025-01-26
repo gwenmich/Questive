@@ -14,6 +14,7 @@ class MainMenu(BaseScreen):
         self.exit_button = Button(SCREEN_WIDTH // 2 - MEDIUM_BUTTON_WIDTH // 2, 490, MEDIUM_BUTTON_WIDTH,
                                   MEDIUM_BUTTON_HEIGHT, "Exit", LARGE_FONT)
 
+
     def draw_screen(self):
 
         self.display.blit(self.logo_img, (SCREEN_WIDTH//2 - 292, 150))

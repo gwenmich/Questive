@@ -21,12 +21,11 @@ class Draw:
         rendered_txt_rect = rendered_text.get_rect(center=pos)
         self.screen.blit(rendered_text, rendered_txt_rect)
 
-    def render_text_multiple_lines(self, text):
-        y_pos = 0
+    def render_text_multiple_lines(self, text, y_pos=150):
         font = pygame.font.Font(FONT, MEDIUM_FONT)
         for line in text:
             rendered_line = font.render(line, True, WHITE)
-            render_line_rect = rendered_line.get_rect(center=(SCREEN_WIDTH // 2, 150 + y_pos))
+            render_line_rect = rendered_line.get_rect(center=(SCREEN_WIDTH // 2, y_pos))
             y_pos += 28
             self.screen.blit(rendered_line, render_line_rect)
 

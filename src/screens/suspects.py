@@ -36,6 +36,14 @@ class Suspects(BaseScreen):
         suspects = DbConnection().get_suspects()
         return suspects
 
+    def draw_suspect(self, suspect, x, y, n):
+        self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
+        suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
+        suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
+        self.display.blit(suspect_img, suspect_img_rect)
+        return suspect_img_rect
+
+
     # method also used in arrest_suspect
     def draw_suspects(self):
         all_suspects = self.get_suspects()
@@ -50,14 +58,9 @@ class Suspects(BaseScreen):
             if n < suspects_per_row:
                 pass
             elif n == 5:
-                x = x_starting_pos
-                y = 550
+                x, y = x_starting_pos, 550
 
-            self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
-            suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
-            suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
-            self.display.blit(suspect_img, suspect_img_rect)
-
+            suspect_img_rect = self.draw_suspect(suspect, x, y, n)
             self.check_button_press(suspect_img_rect, n)
 
             x += 200

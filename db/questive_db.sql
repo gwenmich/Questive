@@ -26,15 +26,15 @@ CREATE TABLE high_scores (
 INSERT INTO suspects (name, hair_colour, eye_colour, wears_glasses, shirt_colour, trouser_colour, shoe_colour, wears_a_hat)
 VALUES
 ('Al Ibi', 'Red', 'Brown', FALSE, 'Blue', 'White', 'Red', TRUE),
-('Tom Foolery', 'Brown', 'Brown', TRUE, 'Red', 'White', 'Blue', TRUE),
-('Mo Tives', 'Blonde', 'Brown', FALSE, 'Blue', 'Black', 'Blue', FALSE),
-('Bend Da-Rules', 'Brown', 'Brown', TRUE, 'Yellow', 'Brown', 'Red', TRUE),
-('De Cissed', 'Blonde', 'Blue', TRUE, 'Red', 'Black', 'Blue', FALSE),
-('Cole Blooded', 'Brown', 'Blue', FALSE, 'Red', 'Black', 'Orange', TRUE),
-('Ima Goner', 'Red', 'Blue', FALSE, 'Yellow', 'Brown', 'Orange', FALSE),
 ('Barry De-Hatchett', 'Blonde', 'Blue', TRUE, 'Yellow', 'Brown', 'Orange', FALSE),
+('Bend Da-Rules', 'Brown', 'Brown', TRUE, 'Yellow', 'Brown', 'Red', TRUE),
+('Cole Blooded', 'Brown', 'Blue', FALSE, 'Red', 'Black', 'Orange', TRUE),
+('De Cissed', 'Blonde', 'Blue', TRUE, 'Red', 'Black', 'Blue', FALSE),
 ('Faye Tality', 'Red', 'Blue', TRUE, 'Blue', 'White', 'White', TRUE),
-('Hugh Dunnit', 'Brown', 'Brown', FALSE, 'Yellow', 'Black', 'Red', TRUE)
+('Hugh Dunnit', 'Brown', 'Brown', FALSE, 'Yellow', 'Black', 'Red', TRUE),
+('Ima Goner', 'Red', 'Blue', FALSE, 'Yellow', 'Brown', 'Orange', FALSE),
+('Mo Tives', 'Blonde', 'Brown', FALSE, 'Blue', 'Black', 'Blue', FALSE),
+('Tom Foolery', 'Brown', 'Brown', TRUE, 'Red', 'White', 'Blue', TRUE)
 ;
 
 

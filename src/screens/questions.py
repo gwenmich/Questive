@@ -86,7 +86,7 @@ class Question(BaseScreen):
                 x = SCREEN_WIDTH // 2 - 400
                 y = 250 + i * 80
                 width, height = 800, 50
-                if len(answer) > 50:
+                if len(answer) > 40:
                     button = Button(x, y, width, height, answer, SMALL_MED_FONT)
                 else:
                     button = Button(x, y, width, height, answer, MEDIUM_FONT)

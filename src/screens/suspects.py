@@ -14,6 +14,7 @@ class Suspects:
     def draw_suspect(self, suspect, x, y, n):
         self.draw.render_text(suspect["name"], SMALL_FONT, (x, y))
         suspect_img = pygame.image.load(f"assets/suspects/{n}.png").convert_alpha()
+        suspect_img.set_alpha(suspect["alpha"]) # draw suspect with current alpha value
         suspect_img_rect = suspect_img.get_rect(topleft=(x - 60, y - 140))
         self.screen.blit(suspect_img, suspect_img_rect)
         return suspect_img_rect
@@ -33,19 +34,27 @@ class Suspects:
                 x, y = x_starting_pos, 550
 
             suspect_img_rect = self.draw_suspect(suspect, x, y, n)
-            self.check_button_press(suspect_img_rect, n)
+            self.check_button_press(suspect, suspect_img_rect, n)
 
             x += 200
             n += 1
 
-    def check_button_press(self, suspect_img_rect, n):
+    def check_button_press(self, suspect, suspect_img_rect, n):
+        position = pygame.mouse.get_pos()
+        pressed = pygame.mouse.get_pressed()
+
         if self.game_state_manager.get_state() == "suspects":
-            # could potentially add transparency settings in here?--------------------
-            pass
+
+            if suspect_img_rect.collidepoint(position) and pressed[0]:
+                if suspect["alpha"] == 255:
+                    suspect["alpha"] = 100
+
+                else:
+                    suspect["alpha"] = 255
+
+
         # Checks when the mouse is pressed - not sure if this is in right place - potential refactoring -----------
         elif self.game_state_manager.get_state() == "arrest_suspect":
-            position = pygame.mouse.get_pos()
-            pressed = pygame.mouse.get_pressed()
 
             if suspect_img_rect.collidepoint(position) and pressed[0]:
                 if self.murderer[0]["suspect_id"] == self.suspects[n]["suspect_id"]:

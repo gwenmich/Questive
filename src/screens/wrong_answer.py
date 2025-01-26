@@ -1,5 +1,3 @@
-import pygame.display
-
 from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
 from src.screens.base_screen import BaseScreen
 import random
@@ -17,13 +15,12 @@ class WrongAnswer(BaseScreen):
             "You're running out of places to hide..."
         ]
 
-        self.random_text = None
+        self.message = random.choice(self.text)
 
-    def draw_screen(self):
-        if not self.random_text:
-            self.random_text = random.choice(self.text)
-        # ------ Temporary placeholder----- ----------
-        self.draw.render_text(self.random_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
+    def draw_screen(self, text):
+        self.draw.render_text(text, MEDIUM_FONT, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+
 
     def check_question_status(self):
         if self.question.index < len(self.question.questions):
@@ -32,10 +29,12 @@ class WrongAnswer(BaseScreen):
             self.text = "Wrong answer..Times up..you must arrest a suspect"
             self.button_handler.arrest()
 
+
     def run(self):
         self.timer.draw_timer()
-        self.draw_screen()
+        self.draw_screen(self.message)
         self.check_question_status()
+
 
 
 if __name__ == "__main__":

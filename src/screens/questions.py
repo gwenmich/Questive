@@ -92,7 +92,7 @@ class Question(BaseScreen):
                 if button.text == self.correct_answers[self.index]:
                     print(
                         f"Q{self.index + 1}: The player chose the CORRECT answer! Correct answer was {self.correct_answers[self.index]}")
-                    self.game_state_manager.set_state("suspects")
+                    self.game_state_manager.set_state("correct_answer")
                     self.index += 1
                     self.create_buttons()
 

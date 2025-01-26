@@ -4,10 +4,9 @@ from src.screens.base_screen import BaseScreen
 
 class ArrestSuspect(BaseScreen):
 
-    def __init__(self, display, game_state_manager, draw, timer, button_handler, suspects):
+    def __init__(self, display, game_state_manager, draw, timer, suspects):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
-        self.button_handler = button_handler
         self.suspects = suspects
 
     def draw_text(self):
@@ -20,7 +19,6 @@ class ArrestSuspect(BaseScreen):
         self.timer.draw_timer()
         self.draw_text()
         self.suspects.draw_suspects()
-        self.button_handler.arrest()
 
     def run(self):
         self.draw_screen()

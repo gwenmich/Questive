@@ -1,4 +1,4 @@
-from src.game_config.global_config import MEDIUM_FONT, SCREEN_WIDTH, SCREEN_HEIGHT
+from src.game_config.global_config import SCREEN_WIDTH
 from src.screens.base_screen import BaseScreen
 import pygame
 
@@ -6,7 +6,7 @@ import pygame
 class GameLost(BaseScreen):
 
     def draw_screen(self):
-        img = pygame.image.load("assets/game_lost.png")
+        img = pygame.image.load("assets/images/game_lost.png")
         self.display.blit(img, (SCREEN_WIDTH // 2 - 128, 350))
         text = ["You didn't manage to uncover the killer in time...",
                 "They struck again and you were the target.",

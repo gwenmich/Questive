@@ -3,7 +3,8 @@ from src.screens.base_screen import BaseScreen
 
 
 class CorrectAnswer(BaseScreen):
-    def __init__(self, display, game_state_manager, draw, timer, question, clues, button_handler, suspects, event_handler):
+    def __init__(self, display, game_state_manager, draw, timer, question, clues, button_handler, suspects,
+                 event_handler):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
         self.question = question
@@ -26,7 +27,7 @@ class CorrectAnswer(BaseScreen):
         if not current_clue:
             new_clue = f"Clue: {self.clues.get_clue()}"
             self.event_handler.set_clue(new_clue)
-            print(f"Updated clue: {current_clue} (Type: {type(current_clue)})")
+            print(f"Clue: {current_clue}")
 
         # Render the clue text
         self.draw.render_text(str(current_clue), MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))

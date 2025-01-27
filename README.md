@@ -38,7 +38,13 @@ getting clues to help eliminate suspects.
             <th>Arrest suspect</th></tr>            
         <tr>
             <td><img src="assets/images/readme_imgs/correct_answer_eliminate.png" alt="Correct answer screen" width="400" height="250"></td>
-            <td><img src="assets/images/readme_imgs/arrest_suspect_screen.png" alt="Arrest Suspect Screen" width="400" height="250"></td></tr>
+            <td><img src="assets/images/readme_imgs/arrest_suspect.png" alt="Arrest Suspect Screen" width="400" height="250"></td></tr>
+        <tr>
+            <th>Game over (Lost)</th>
+            <th>Game over (Won)</th></tr>            
+        <tr>
+            <td><img src="assets/images/readme_imgs/game_lost.png" alt="Game over (Lost)" width="400" height="250"></td>
+            <td><img src="assets/images/readme_imgs/game_won.png" alt="Game over (won)" width="400" height="250"></td></tr>
 </tbody></table>
 
 
@@ -52,8 +58,7 @@ getting clues to help eliminate suspects.
 5. Good luck finding the murderer!
 
 ***
-
-### 🔎 Gameplay Mechanics:
+### 🔎  Gameplay Mechanics:
 Questive uses mouse control throughout the game.
 
 

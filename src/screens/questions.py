@@ -6,6 +6,7 @@ from src.screens.base_screen import BaseScreen
 
 
 class Question(BaseScreen):
+
     def __init__(self, display, game_state_manager, draw, timer, event_handler):
         super().__init__(display, game_state_manager, draw)
         self.timer = timer
@@ -25,6 +26,7 @@ class Question(BaseScreen):
         self.get_question_data()
         self.create_buttons()
 
+
     def get_question_data(self):
         for question in self.question_data:
             self.questions.append(question["question"])
@@ -33,6 +35,7 @@ class Question(BaseScreen):
 
             all_answers = [question["correct_answer"]] + question["incorrect_answers"]
             self.question_answers.append(all_answers)
+
 
     # splits question text into rows to fit on screen
     def split_long_text(self, char_split_length, part0):
@@ -52,6 +55,7 @@ class Question(BaseScreen):
             parts.append(part_2)
             return parts
 
+
     def display_question(self):
         part_0 = f"Q{self.index + 1}: "
         if len(self.questions[self.index]) > 60:
@@ -65,9 +69,11 @@ class Question(BaseScreen):
             short_question = part_0 + self.questions[self.index]
             self.draw.render_text(short_question, MEDIUM_FONT, (SCREEN_WIDTH // 2, 180))
 
+
     def display_buttons(self):
         for button in self.buttons:
             self.display.blit(button.image, button.rect)
+
 
     def create_buttons(self):
         # checks against number of available questions
@@ -80,11 +86,12 @@ class Question(BaseScreen):
                 x = SCREEN_WIDTH // 2 - 400
                 y = 250 + i * 80
                 width, height = 800, 50
-                if len(answer) > 50:
+                if len(answer) > 40:
                     button = Button(x, y, width, height, answer, SMALL_MED_FONT)
                 else:
                     button = Button(x, y, width, height, answer, MEDIUM_FONT)
                 self.buttons.append(button)
+
 
     # for each button, a different state is set depending on correct/incorrect answer
     def checks_answer_pressed(self):
@@ -105,6 +112,7 @@ class Question(BaseScreen):
                     self.game_state_manager.set_state("wrong_answer")
                     self.index += 1
                     self.create_buttons()
+
 
     def run(self):
         self.timer.draw_timer()

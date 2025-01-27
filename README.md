@@ -61,3 +61,9 @@ getting clues to help eliminate suspects.
 ### 🔎  Gameplay Mechanics:
 Questive uses mouse control throughout the game.
 
+
+### 🔎  Music credit:
+Music from #Uppbeat (free for Creators!):
+https://uppbeat.io/t/v-draganov/mystery-box
+License code: IP7WRZ6A0WKFINSG
+

@@ -11,7 +11,7 @@ class ArrestSuspect(BaseScreen):
 
     def draw_text(self):
         heading_text = "Time to make the arrest!"
-        info_text = "Click on the suspect below to make the arrest"
+        info_text = "Click on a suspect below to make the arrest"
         self.draw.render_text(heading_text, MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
         self.draw.render_text(info_text, SMALL_MED_FONT, (SCREEN_WIDTH // 2, 165))
 

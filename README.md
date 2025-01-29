@@ -25,7 +25,7 @@ getting clues to help eliminate suspects.
 Click below to see the game in action!
 
 <a href="https://www.youtube.com/watch?v=iBGFMvSD3pY
-" target="_blank"><img src="[questive_main_menu.png](assets/images/readme_imgs/questive_main_menu.png)"
+" target="_blank"><img src="assets/images/readme_imgs/questive_main_menu.png"
 alt="Questive Demo" width="440" height="360" border="10" /></a>
 
 ***

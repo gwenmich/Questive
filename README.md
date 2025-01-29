@@ -26,7 +26,7 @@ Click below to see the game in action!
 
 <a href="https://www.youtube.com/watch?v=iBGFMvSD3pY
 " target="_blank"><img src="assets/images/readme_imgs/questive_main_menu.png"
-alt="Questive Demo" width="400" height="360" border="10" /></a>
+alt="Questive Demo" width="400" height="250" border="10" /></a>
 
 ***
 

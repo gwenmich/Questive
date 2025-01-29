@@ -3,29 +3,34 @@
 # **Questive Group Project**
 
 ***
-### 🔎  Team:
+
+### 🔎 Team:
 
 + Gwen Michailidis
 + Melanie Clark
 
 ***
 
-### 🔎  Game Overview:
+### 🔎 Game Overview:
 
 Questive is a trivia based game.
 
 Set in a pub in Trivia Hollow, the aim of the game is to find who murdered the Quizmaster by answering questions and
 getting clues to help eliminate suspects.
 
-### 🔎  Game demo:
+***
+
+### 🔎 Game demo:
 
 Click below to see the game in action!
 
 <a href="https://www.youtube.com/watch?v=iBGFMvSD3pY
-" target="_blank"><img src="http://img.youtube.com/vi/iBGFMvSD3pY/0.jpg"
+" target="_blank"><img src="[questive_main_menu.png](assets/images/readme_imgs/questive_main_menu.png)"
 alt="Questive Demo" width="440" height="360" border="10" /></a>
 
-### 🔎  Game screenshots:
+***
+
+### 🔎 Game screenshots:
 
 <table bgcolor="#00000F">
     <tbody>
@@ -57,7 +62,8 @@ alt="Questive Demo" width="440" height="360" border="10" /></a>
 
 
 ***
-### 🔎  How to Run Questive:
+
+### 🔎 How to Run Questive:
 
 1. Create SQL database using `db/db_utils/questive_db_sql`
 2. Execute `questive_db_sql` file
@@ -66,11 +72,14 @@ alt="Questive Demo" width="440" height="360" border="10" /></a>
 5. Good luck finding the murderer!
 
 ***
-### 🔎  Gameplay Mechanics:
+
+### 🔎 Gameplay Mechanics:
+
 Questive uses mouse control throughout the game.
+***
 
+### 🔎 Music credit:
 
-### 🔎  Music credit:
 Music from #Uppbeat (free for Creators!):
 https://uppbeat.io/t/v-draganov/mystery-box
 License code: IP7WRZ6A0WKFINSG

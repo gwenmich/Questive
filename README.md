@@ -66,7 +66,7 @@ alt="Questive Demo" width="400" height="250" border="10" /></a>
 ### 🔎 How to Run Questive:
 
 1. Create SQL database using `db/db_utils/questive_db_sql`
-2. Execute `questive_db_sql` file
+2. Execute `questive_db_sql`
 3. Install required dependencies - 'pip install -r requirements.txt'
 4. Run the game file `main.py`
 5. Good luck finding the murderer!

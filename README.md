@@ -17,7 +17,15 @@ Questive is a trivia based game.
 Set in a pub in Trivia Hollow, the aim of the game is to find who murdered the Quizmaster by answering questions and
 getting clues to help eliminate suspects.
 
-### 🔎  Game screenshots
+### 🔎  Game demo:
+
+Click below to see the game in action!
+
+<a href="https://www.youtube.com/watch?v=iBGFMvSD3pY
+" target="_blank"><img src="http://img.youtube.com/vi/iBGFMvSD3pY/0.jpg"
+alt="Questive Demo" width="440" height="360" border="10" /></a>
+
+### 🔎  Game screenshots:
 
 <table bgcolor="#00000F">
     <tbody>
@@ -52,7 +60,7 @@ getting clues to help eliminate suspects.
 ### 🔎  How to Run Questive:
 
 1. Create SQL database using `db/db_utils/questive_db_sql`
-2. Execute `db/db_utils/questive_db_sql` file
+2. Execute `questive_db_sql` file
 3. Install required dependencies - 'pip install -r requirements.txt'
 4. Run the game file `main.py`
 5. Good luck finding the murderer!

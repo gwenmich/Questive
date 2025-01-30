@@ -108,6 +108,7 @@ class Question(BaseScreen):
                     print(
                         f"Q{self.index + 1}: The player chose the INCORRECT answer. Correct answer was {self.correct_answers[self.index]}")
                     self.game_state_manager.set_state("wrong_answer")
+                    self.event_handler.set_wrong_answer_text("")
                 self.index += 1
                 self.create_buttons()
 

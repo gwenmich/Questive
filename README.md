@@ -16,7 +16,7 @@
 Questive is a trivia based game.
 
 Set in a pub in Trivia Hollow, the aim of the game is to find who murdered the Quizmaster by answering questions and
-getting clues to help eliminate suspects.
+getting clues to help eliminate suspects. Watch out for misleading clues that could throw your investigation off track!
 
 ***
 
@@ -24,7 +24,7 @@ getting clues to help eliminate suspects.
 
 Click below to see the game in action!
 
-<a href="https://www.youtube.com/watch?v=iBGFMvSD3pY
+<a href="https://www.youtube.com/watch?v=RQRJ0MeZGlc&feature=youtu.be
 " target="_blank"><img src="assets/images/readme_imgs/questive_main_menu.png"
 alt="Questive Demo" width="400" height="250" border="10" /></a>
 

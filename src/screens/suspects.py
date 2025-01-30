@@ -34,36 +34,42 @@ class Suspects:
                 x, y = x_starting_pos, 550
 
             suspect_img_rect = self.draw_suspect(suspect, x, y, n)
-            self.check_button_press(suspect, suspect_img_rect, n)
-
             x += 200
             n += 1
 
-    def check_button_press(self, suspect, suspect_img_rect, n):
+            suspect["suspect_img_rect"] = suspect_img_rect
+        pygame.display.update()
+
+    # Checks if user clicks on image
+    def check_button_pressed(self):
         position = pygame.mouse.get_pos()
-        pressed = pygame.mouse.get_pressed()
 
-        if self.game_state_manager.get_state() == "correct_answer":
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for suspect in self.suspects:
+                    if suspect["suspect_img_rect"].collidepoint(position):
+                        if self.game_state_manager.get_state() == "correct_answer":
+                            self.suspect_press(suspect)
+                        elif self.game_state_manager.get_state() == "arrest_suspect":
+                            self.murderer_guess(suspect, position)
 
-            if suspect_img_rect.collidepoint(position) and pressed[0]:
-                if suspect["alpha"] == 255:
-                    suspect["alpha"] = 100
+    # Changes transparency when suspect clicked
+    @staticmethod
+    def suspect_press(suspect):
+        if suspect["alpha"] == 255:
+            suspect["alpha"] = 100  # Fade the suspect
+        else:
+            suspect["alpha"] = 255  # Bring the suspect back to full opacity
 
-                else:
-                    suspect["alpha"] = 255
-
-
-        # Checks when the mouse is pressed
-        elif self.game_state_manager.get_state() == "arrest_suspect":
-
-            if suspect_img_rect.collidepoint(position) and pressed[0]:
-                if self.murderer[0]["suspect_id"] == self.suspects[n]["suspect_id"]:
-                    print("The murder has been caught!")
-                    self.game_state_manager.set_state("game_won")
-
-                else:
-                    print("Incorrect arrest")
-                    self.game_state_manager.set_state("game_lost")
+    # Checks if player has arrested the murderer
+    def murderer_guess(self, suspect, position):
+        if suspect["suspect_img_rect"].collidepoint(position):
+            if self.murderer[0]["suspect_id"] == suspect["suspect_id"]:
+                print("The murder has been caught!")
+                self.game_state_manager.set_state("game_won")
+            else:
+                print("Incorrect arrest")
+                self.game_state_manager.set_state("game_lost")
 
 
 if __name__ == "__main__":

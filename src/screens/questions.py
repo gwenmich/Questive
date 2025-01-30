@@ -95,7 +95,7 @@ class Question(BaseScreen):
 
     # for each button, a different state is set depending on correct/incorrect answer
     def checks_answer_pressed(self):
-        # print(self.correct_answers[self.index]) # used for debugging/testing
+        # print(self.correct_answers[self.index])  # used for debugging/testing
         for button in self.buttons:
             if button.is_pressed():
                 if button.text == self.correct_answers[self.index]:
@@ -103,15 +103,14 @@ class Question(BaseScreen):
                         f"Q{self.index + 1}: The player chose the CORRECT answer! Correct answer was {self.correct_answers[self.index]}")
                     self.game_state_manager.set_state("correct_answer")
                     self.event_handler.set_clue("")
-                    self.index += 1
-                    self.create_buttons()
 
                 elif button.text in self.incorrect_answers[self.index]:
                     print(
                         f"Q{self.index + 1}: The player chose the INCORRECT answer. Correct answer was {self.correct_answers[self.index]}")
                     self.game_state_manager.set_state("wrong_answer")
-                    self.index += 1
-                    self.create_buttons()
+                    self.event_handler.set_wrong_answer_text("")
+                self.index += 1
+                self.create_buttons()
 
 
     def run(self):

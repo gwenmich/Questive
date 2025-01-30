@@ -36,7 +36,8 @@ class DbConnection:
                 "trouser_colour": suspect_info[6],
                 "shoe_colour": suspect_info[7],
                 "wears_a_hat": "wears a hat" if bool(suspect_info[8]) == True else "doesn't wear a hat",
-                "alpha" : 255 # transparency value - default to full visibility
+                "alpha": 255,  # transparency value - default to full visibility
+                "suspect_rect_img": None
             })
         return suspect_details
 

@@ -1,6 +1,6 @@
 from db.db_utils import DbConnection
 from src.clues import Clues
-from src.game_config.event_handler import EventHandler
+from src.game_config.getters_setters import GettersSetters
 from src.game_config.utils import *
 from src.game_state_manager import GameStateManager
 from src.game_config.global_config import *
@@ -34,11 +34,11 @@ class Game:
 
         self.main_menu = MainMenu(self.screen, self.game_state_manager, self.draw)
         self.rules = Rules(self.screen, self.game_state_manager, self.draw, self.timer)
-        self.event_handler = EventHandler()
+        self.event_handler = GettersSetters()
         self.question = Question(self.screen, self.game_state_manager, self.draw, self.timer, self.event_handler)
         self.suspects = Suspects(self.screen, self.game_state_manager, self.draw, self.murderer)
         self.wrong_answer = WrongAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
-                                        self.button_handler)
+                                        self.button_handler, self.event_handler)
         self.correct_answer = CorrectAnswer(self.screen, self.game_state_manager, self.draw, self.timer, self.question,
                                             self.clues, self.button_handler, self.suspects, self.event_handler)
         self.arrest_suspect = ArrestSuspect(self.screen, self.game_state_manager, self.draw, self.timer, self.suspects)

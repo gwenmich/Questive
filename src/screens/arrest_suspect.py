@@ -22,6 +22,7 @@ class ArrestSuspect(BaseScreen):
 
     def run(self):
         self.draw_screen()
+        self.suspects.check_button_pressed()
 
 
 if __name__ == "__main__":

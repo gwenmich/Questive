@@ -11,8 +11,8 @@ class WrongAnswer(BaseScreen):
         self.button_handler = button_handler
         self.text = [
             "Wrong answer. The killer heard you...",
-            "Wrong. The killer is one step closer to finding you!",
-            "You're running out of places to hide..."
+            "Wrong answer. The killer is one step closer to finding you!",
+            "Wrong answer! You're running out of places to hide..."
         ]
 
         self.message = random.choice(self.text)

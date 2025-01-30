@@ -3,21 +3,34 @@
 # **Questive Group Project**
 
 ***
-### 🔎  Team:
+
+### 🔎 Team:
 
 + Gwen Michailidis
 + Melanie Clark
 
 ***
 
-### 🔎  Game Overview:
+### 🔎 Game Overview:
 
 Questive is a trivia based game.
 
 Set in a pub in Trivia Hollow, the aim of the game is to find who murdered the Quizmaster by answering questions and
-getting clues to help eliminate suspects.
+getting clues to help eliminate suspects. Watch out for misleading clues that could throw your investigation off track!
 
-### 🔎  Game screenshots
+***
+
+### 🔎 Game demo:
+
+Click below to see the game in action!
+
+<a href="https://www.youtube.com/watch?v=RQRJ0MeZGlc&feature=youtu.be
+" target="_blank"><img src="assets/images/readme_imgs/questive_main_menu.png"
+alt="Questive Demo" width="400" height="250" border="10" /></a>
+
+***
+
+### 🔎 Game screenshots:
 
 <table bgcolor="#00000F">
     <tbody>
@@ -49,20 +62,24 @@ getting clues to help eliminate suspects.
 
 
 ***
-### 🔎  How to Run Questive:
+
+### 🔎 How to Run Questive:
 
 1. Create SQL database using `db/db_utils/questive_db_sql`
-2. Execute `db/db_utils/questive_db_sql` file
+2. Execute `questive_db_sql`
 3. Install required dependencies - 'pip install -r requirements.txt'
 4. Run the game file `main.py`
 5. Good luck finding the murderer!
 
 ***
-### 🔎  Gameplay Mechanics:
+
+### 🔎 Gameplay Mechanics:
+
 Questive uses mouse control throughout the game.
+***
 
+### 🔎 Music credit:
 
-### 🔎  Music credit:
 Music from #Uppbeat (free for Creators!):
 https://uppbeat.io/t/v-draganov/mystery-box
 License code: IP7WRZ6A0WKFINSG

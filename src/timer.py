@@ -19,7 +19,7 @@ class Timer:
         if self.timer_running:
             elapsed_time = time.time() - self.start_time
             seconds = int(elapsed_time % 60)
-            minutes = seconds // 60  # rounds down to nearest integer
+            minutes = int(elapsed_time // 60)  # rounds down to nearest integer
             self.current_time = f"{minutes:02}:{seconds:02}"
             # displays timer with 2 digits for minutes and seconds
         self.draw.render_text(str(self.current_time), MEDIUM_FONT, (100, 50))

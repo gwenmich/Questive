@@ -32,7 +32,7 @@ class WrongAnswer(BaseScreen):
         if self.question.index < len(self.question.questions):
             self.button_handler.next_question()
         else:
-            self.wrong_answer = "Wrong answer..Times up..you must arrest a suspect"
+            self.event_handler.set_wrong_answer_text("Wrong answer..Times up..you must arrest a suspect")
             self.button_handler.arrest()
 
     def run(self):

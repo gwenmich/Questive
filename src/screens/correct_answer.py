@@ -11,7 +11,6 @@ class CorrectAnswer(BaseScreen):
         self.clues = clues
         self.button_handler = button_handler
         self.suspects = suspects
-        self.draw_suspects = self.suspects.draw_suspects()
         self.event_handler = event_handler
 
     def draw_correct_answer(self):
@@ -27,7 +26,6 @@ class CorrectAnswer(BaseScreen):
         if not current_clue:
             new_clue = f"Clue: {self.clues.get_clue()}"
             self.event_handler.set_clue(new_clue)
-            print(f"Clue: {current_clue}")
 
         # Render the clue text
         self.draw.render_text(str(current_clue), MEDIUM_FONT, (SCREEN_WIDTH // 2, 115))
@@ -47,12 +45,14 @@ class CorrectAnswer(BaseScreen):
         self.draw_correct_answer()
         self.draw_clue()
         self.draw_info_text()
-        self.suspects.draw_suspects()
-        self.button_handler.arrest()
 
     def run(self):
         self.draw_screen()
         self.check_question_status()
+        self.button_handler.arrest()
+        self.suspects.draw_suspects() # must be immediately before check_pressed due to rendering
+        self.suspects.check_button_pressed()
+
 
 
 if __name__ == "__main__":
